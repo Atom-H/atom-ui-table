@@ -1,7 +1,7 @@
 <template>
     <div>
         <input v-model="page" style="border:1px solid #ccc;padding:5px;">
-        <v-table v-model="checkedMap" :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove" @download="download" @toggle="toggle" @changeDuty="changeDuty">
+        <v-table :selectedList="selectedList" :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove" @download="download" @toggle="toggle" @changeDuty="changeDuty" @select="selectRow">
         </v-table>
         <v-page v-show="0 != status" v-model="page" :count="count"></v-page>
     </div>
@@ -18,7 +18,7 @@ export default {
 
     data() {
         return {
-            checkedMap: {},
+            selectedList: [true, true, true, false, true],
             status: -1,
             page: 0,
             count: 10,
@@ -75,12 +75,15 @@ export default {
     },
 
     methods: {
+        selectRow({row, index}){
+            this.selectedList.splice(index, 1, !this.selectedList[index]);
+        },
         getTableData() {
             return new Promise((resolve, reject) => {
                 axios('./mock/table', {
                     params: {
                         page: this.page,
-                        limit: 15
+                        limit: 5
                     }
                 }).then(response => {
                     this.status = response.data.status;
