@@ -1,7 +1,7 @@
 <template>
     <div>
         <input v-model="page" style="border:1px solid #ccc;padding:5px;">
-        <v-table :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove" @download="download" @toggle="toggle" @changeDuty="changeDuty">
+        <v-table v-model="checkedMap" :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove" @download="download" @toggle="toggle" @changeDuty="changeDuty">
         </v-table>
         <v-page v-show="0 != status" v-model="page" :count="count"></v-page>
     </div>
@@ -18,6 +18,7 @@ export default {
 
     data() {
         return {
+            checkedMap: {},
             status: -1,
             page: 0,
             count: 10,
@@ -69,13 +70,13 @@ export default {
     watch: {
         page() {
             this.status = -1;
-            this.getTableData().then(response=> {});
+            this.getTableData().then(response => {});
         }
     },
 
     methods: {
-        getTableData(){
-            return new Promise((resolve, reject)=>{
+        getTableData() {
+            return new Promise((resolve, reject) => {
                 axios('./mock/table', {
                     params: {
                         page: this.page,
@@ -89,44 +90,56 @@ export default {
                         this.dataSource = [];
                     }
                     resolve(response.data);
-                });   
+                });
             });
         },
 
-        changeDuty({row, index}){
+        changeDuty({
+            row,
+            index
+        }) {
             this.$confirm('是否执行该操作?').then(() => {
                 this.status = -1;
-                axios.post('./mock/success').then(response=> {
+                axios.post('./mock/success').then(response => {
                     this.dataSource[index].toggleIndex = response.data.data.index;
-                    this.getTableData().then(response=> {
+                    this.getTableData().then(response => {
                         this.status = 1;
                     });
                 });
             }).catch(() => {
 
-            }); 
+            });
         },
 
-        toggle({row, index}){
+        toggle({
+            row,
+            index
+        }) {
             this.$confirm('是否执行该操作?').then(() => {
                 this.status = -1;
-                axios.post('./mock/success').then(response=> {
+                axios.post('./mock/success').then(response => {
                     this.dataSource[index].toggleIndex = response.data.data.index;
                     this.status = 1;
                 });
             }).catch(() => {
 
-            });            
+            });
         },
 
-        download({row, index}){
+        download({
+            row,
+            index
+        }) {
             window.location.href = row.url;
         },
 
-        remove({row, index}) {
+        remove({
+            row,
+            index
+        }) {
             this.$confirm('是否删除?').then(() => {
                 this.status = -1;
-                axios.post('./mock/success').then(()=> {
+                axios.post('./mock/success').then(() => {
                     this.status = 1;
                     this.dataSource.splice(index, 1);
                 });

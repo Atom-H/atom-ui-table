@@ -18,7 +18,8 @@
             <tbody>
                 <tr v-for="(row, i) in dataSource" :key="row[primaryKey]">
                     <td>
-                        <v-checkbox v-model="isCheckedList[i]" @input="changeCheckbox(i)"></v-checkbox>
+                        {{checkedMap[row[primaryKey]]}}
+                        <v-checkbox :value="checkedMap[row[primaryKey]]" @input="changeCheckbox(row[primaryKey])"></v-checkbox>
                     </td>
                     <td v-for="th in columns">{{row[th.key]}}</td>
                     <td v-if="undefined != actions" class="actions">
@@ -71,31 +72,46 @@ export default {
         },
 
         value: {
-            type: Array
+            type: Object
         }
     },
 
     data() {
         return {
             isCheckedAll: false,
-            isCheckedList: []
+            checkedMap: {} // array-like
         }
     },
 
     watch: {
+        dataSource(value){
+            value.forEach(row=> {
+                var primaryKey = row[this.primaryKey];
+                this.checkedMap[primaryKey] = false;
+            });
+            this.$emit('input', this.checkedMap); 
+        },
 
+        isCheckedAll(value){
+            for(var k in this.checkedMap) {
+                this.checkedMap[k] = value;
+            }
+            this.$emit('input', this.checkedMap);
+        }
     },
 
     methods: {
         operateRow(eventName, index) {
             this.$emit(eventName, {
-                row: this.tableData[index].row,
+                row: this.dataSource[index],
                 index
             });
         },
 
-        changeCheckbox(index) {
-            this.$emit('input', this.isCheckedList);
+        changeCheckbox(key) {
+            syslog(this.checkedMap[key])
+            this.checkedMap[key] = !this.checkedMap[key];
+            this.$emit('input', this.checkedMap);
         }
     },
 
