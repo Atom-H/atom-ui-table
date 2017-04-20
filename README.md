@@ -51,3 +51,14 @@ cnpm i
 }
 ```
 
+## 开发模式
+```
+npm run dev
+```
+
+## 生成dist
+```
+npm run build
+```
+
+
