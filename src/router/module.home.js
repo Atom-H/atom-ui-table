@@ -67,5 +67,26 @@ export var routes = [
                 resolve(require('../views/template/IFrame'))
             });
         }
+    }, {
+        path: 'x/add',
+        component: resolve => {
+            require.ensure(['../views/template2/AddView'], () => {
+                resolve(require('../views/template2/AddView'))
+            });
+        }
+    }, {
+        path: '*/edit*',
+        component: resolve => {
+            require.ensure(['../views/template2/EditView'], () => {
+                resolve(require('../views/template2/EditView'))
+            });
+        }
+    }, {
+        path: '*/list',
+        component: resolve => {
+            require.ensure(['../views/template2/ListView'], () => {
+                resolve(require('../views/template2/ListView'))
+            });
+        }
     }
 ]

@@ -69,6 +69,16 @@ export default {
         }
     },
 
+    created(){
+        var array = [];
+        this.table.forEach((item, i) => {
+            if (value[i]) {
+                array.push(item[this.primaryKey]);
+            }
+        });
+        this.$emit('input', array);
+    },
+
     data() {
         return {
             checkboxSize: '15px',
