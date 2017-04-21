@@ -2,9 +2,11 @@
   "message": "无数据",
   "status": 1,
   "data": {
-    "total":0,
+    "total":100,
     "query":"querystring",
     "url":"./mock/success",
+    "name":"这里是一段标题这里是一段标题",
+    "btnshow":false,
     "mockData":[
       {
         "title":"业绩指标",
@@ -18,6 +20,7 @@
             "listTag":"参考标准",
             "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "listSelf":"自评分",
+            "listIptReadOnly":true,
             "listSelfVal":0
           },
           {
@@ -28,6 +31,7 @@
             "listTag":"参考标准",
             "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "listSelf":"自评分",
+            "listIptReadOnly":false,
             "listSelfVal":0
           }
         ]
@@ -44,6 +48,7 @@
             "listTag":"参考标准",
             "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "listSelf":"自评分",
+            "listIptReadOnly":false,
             "listSelfVal":0
           },
           {
@@ -54,6 +59,7 @@
             "listTag":"参考标准",
             "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "listSelf":"自评分",
+            "listIptReadOnly":true,
             "listSelfVal":0
           }
         ]

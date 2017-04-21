@@ -1,5 +1,6 @@
 <template>
     <div class="d-detail">
+        <div class="d-name" v-html="name"></div>
         <template v-for="(list,listindex) in dataVal">
             <h2 class="dd-title"><i class="fa fa-bar-chart fa-pos"></i>{{list.title}}</h2>
             <!--一个列表项-->
@@ -16,16 +17,22 @@
                 <div class="dd-self-percent">
                     <div class="fl">{{item.listSelf}}</div>
                     <div class="fr">
-                        <input type="text" placeholder="0" v-model="item.listSelfVal">
+                        <input :readonly="item.listIptReadOnly"
+                                type="text"
+                                placeholder="0"
+                                v-model="item.listSelfVal"
+                                @keyup="numFun"
+                                @blur="testNum">
                     </div>
                 </div>
             </template>
             <div class="dd-list-total">加权合计：{{list.listTotal}}</div>
         </template>
 
-        <div class="dd-total">自评总分：0</div>
+        <div class="dd-total">自评总分：{{total}}</div>
         <div class="wrap-drag-btn">
-            <v-button @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
+            <v-button v-if="btnshow" @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
+            <button class="backbtn" @click="backPage" v-else>返回</button>
         </div>
     </div>
 </template>
@@ -41,10 +48,50 @@
                 this.dataVal = response.data.data.mockData;
                 this.url=response.data.data.url;
                 this.query=response.data.data.query;
+                this.name = response.data.data.name;
+                this.total = response.data.data.total;
+                this.btnshow = response.data.data.btnshow;
             });
         },
-        methods:{
+        computed:{
+            inpNum:{
+                get:function(){
+                    return this.oldNum;
 
+                },
+                set:function(newValue){
+                    this.oldNum=newValue.replace(/[^\d]/g,'');
+                }
+            }
+        },
+        methods:{
+//            失去焦点的时候再验证一次
+            testNum:function(e){
+                //                正则验证0到100之间的正数包含小数
+                var r = /^(\d{1,3}(\.\d{1,2})?|100)$/;
+
+                if(!r.test(e.target.value)){
+                    e.target.value='';
+                    alert("请输入0到100之间的数字，最多含两位小数")
+                }
+                else{
+                    e.target.value=parseFloat(e.target.value)
+                }
+                console.log(444)
+
+            },
+//            输入阶段进行的验证
+            numFun:function(e){
+                if(parseInt(e.target.value)>=100){
+                    return e.target.value=100
+                }
+                e.target.value=e.target.value.replace(/^[.]+/,'')
+                e.target.value=e.target.value.replace(/[^0-9.]/g,'')
+            },
+//            返回上一页
+            backPage:function(){
+                window.history.go(-1);
+            },
             showDetail(_listindex,_index){
 
                 if(this.j==_listindex&&this.i==_index){
@@ -100,6 +147,9 @@
                 j:-1,
                 url:"",
                 query:"",
+                name:"",
+                total:"",
+                btnshow:true,
                 backData:'',
                 btnSubmit: {
                     disabled: false,
@@ -114,6 +164,13 @@
 <style lang="scss" rel="stylesheet/scss">
     .d-detail{
         padding: 5px 20px 0;
+        .d-name{
+            text-align: center;
+            font-size: 18px;
+            height: 50px;
+            margin-bottom: 20px;
+            line-height: 50px;
+        }
         h2{ margin: 0 !important;}
         .fa-pos{
             font-size: 16px;
@@ -224,6 +281,8 @@
             text-align: center;
             padding-top: 80px;
             padding-bottom: 40px;
+            font-size: 24px;
+            /*font-weight: bold;*/
         }
         .wrap-drag-btn{
             clear: both;
@@ -244,6 +303,14 @@
             &:hover{
                 opacity: .8;
             }
+        }
+        .backbtn{
+            background: #14bb9d !important;
+            border: 1px solid #14bb9d !important;
+            width: 72px;
+            height: 34px;
+            color: #fff;
+            border-radius: 4px;
         }
     }
 </style>
