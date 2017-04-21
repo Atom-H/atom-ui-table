@@ -16,7 +16,7 @@ import Vue from 'vue'
 import App from './App'
 import store from './store'
 import router from './router'
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
 import './scss/global.scss'
 window.axios = require('axios');
 axios.defaults.headers.common['Access-Token'] = store.state.loginModule.accessToken;

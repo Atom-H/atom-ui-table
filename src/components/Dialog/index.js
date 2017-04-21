@@ -14,20 +14,8 @@ plugin.install = (Vue, options) => {
     // =================================================
     // ==============组件内调用: this.$alert==============
     // =================================================
-    Vue.prototype.$alert = (options = {}) => {
+    Vue.prototype.$alert = (text = '', options = {}) => {
         return new Promise((resolve, reject) => {
-            if ('string' == typeof(options)) {
-                vm.modal.show = true;
-                vm.alert = {
-                    ...vm.alert,
-                    show: true,
-                    ok: () => {
-                        vm.modal.show = false;
-                        resolve();
-                    },
-                    text: options
-                };
-            } else {
                 vm.modal.show = true;
                 vm.alert = {
                     ...vm.alert,
@@ -36,9 +24,9 @@ plugin.install = (Vue, options) => {
                         vm.modal.show = false;
                         resolve();
                     },
+                    text,
                     show: true
                 };
-            };
         });
     };
     // =================================================
@@ -46,7 +34,7 @@ plugin.install = (Vue, options) => {
     // =================================================
     Vue.prototype.$confirm = (options = {}) => {
         return new Promise((resolve, reject) => {
-            if ('string' == typeof(options)) {
+            if ('string' == typeof(options) || 'number' == typeof(options)) {
                 vm.modal.show = true;
                 vm.confirm = {
                     ...vm.confirm,

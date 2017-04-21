@@ -2,7 +2,7 @@
     <div v-if="disabled" class="checkbox">
         <i class="box box-disabled" :style="{width: size, height: size}">
             <transition>
-            <div v-show="value" class="dot"></div>
+            <div v-show="value" :class="[half && 'dot-half' || 'dot']"></div>
             </transition>
         </i>
         <a class="text text-disabled">
@@ -13,7 +13,7 @@
     <div v-else @click="select(opts)" class="checkbox">
         <i class="box" :style="{width: size, height: size}">
             <transition>
-            <div v-show="value" class="dot"></div>
+            <div v-show="value" :class="[half && 'dot-half' || 'dot']"></div>
             </transition>
         </i>
         <a class="text">
@@ -27,15 +27,18 @@ export default {
     name: 'Checkbox',
 
     props: {
+        half: {
+            type: Boolean,
+            default: false
+        },
+
         opts: {
             type: Object
         },
 
         disabled: {
             type: Boolean,
-            default(){
-                return false;
-            }
+            default: false
         },
 
         size: {
@@ -79,6 +82,15 @@ div.checkbox {
             height: 50%;
             width: 50%;
             margin: 25%;
+            border-radius: 1px;
+        }
+        div.dot-half{
+            border-radius: 2px;
+            box-sizing: border-box;
+            background: $color;
+            height: 20%;
+            width: 50%;
+            margin: 40% 25%;
             border-radius: 1px;
         }
     }

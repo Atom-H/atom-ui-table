@@ -13,10 +13,10 @@ export default {
 
 <style lang=scss scope>
     .text-404{
-        font-size: 20rem;
+        font-size: 200px;
         vertical-align: middle;
         text-align: center;
 
     }
-    .text-none{text-align: center;font-size: 3rem;}
+    .text-none{text-align: center;font-size: 30px;}
 </style>

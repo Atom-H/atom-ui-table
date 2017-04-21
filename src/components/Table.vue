@@ -72,7 +72,7 @@ export default {
     created(){
         var array = [];
         this.table.forEach((item, i) => {
-            if (value[i]) {
+            if (this.checkedList[i]) {
                 array.push(item[this.primaryKey]);
             }
         });

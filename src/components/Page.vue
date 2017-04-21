@@ -12,6 +12,11 @@
 <script>
 export default {
     props: {
+        disabled: {
+            type: Boolean,
+            default: false
+        },
+
         value: {
             type: [Number, String]
         },
@@ -29,22 +34,22 @@ export default {
         pageNumber() {
             var array = [];
             // 总数是否超过max
-            if(10 < this.count) {
-                if(4 >= this.value) {
-                    for(var i = 1; i <= 10; i++) {
+            if (10 < this.count) {
+                if (4 >= this.value) {
+                    for (var i = 1; i <= 10; i++) {
                         array.push(i);
                     }
-                } else if(this.count < this.value + 5){
-                    for(var i = this.count - 10; i <= this.count; i++){
+                } else if (this.count < this.value + 5) {
+                    for (var i = this.count - 10; i <= this.count; i++) {
                         array.push(i);
                     }
                 } else {
-                     for(var i = this.value - 4; i <= this.value + 5; i++){
+                    for (var i = this.value - 4; i <= this.value + 5; i++) {
                         array.push(i);
                     }
                 }
             } else {
-                for(var i = 1; i <= this.count; i++) {
+                for (var i = 1; i <= this.count; i++) {
                     array.push(i);
                 }
             }
@@ -54,18 +59,24 @@ export default {
 
     methods: {
         pageTo: function(page) {
-            this.$emit('input', page);
+            if(!this.disabled) {
+                this.$emit('input', page);
+            }
         },
 
         previous: function() {
-            if (1 < this.value) {
-                this.$emit('input', this.value - 1);
+            if(!this.disabled) {
+                if (1 < this.value) {
+                    this.$emit('input', this.value - 1);
+                }
             }
         },
 
         next: function() {
-            if (this.value < this.count) {
-                this.$emit('input', this.value + 1);
+            if(!this.disabled) {
+                if (this.value < this.count) {
+                    this.$emit('input', this.value + 1);
+                }                
             }
         },
     }
@@ -73,7 +84,7 @@ export default {
 </script>
 <style scoped lang=scss>
 .pagination {
-    margin:0;
+    margin: 0;
     padding: 0;
     li {
         &.active {

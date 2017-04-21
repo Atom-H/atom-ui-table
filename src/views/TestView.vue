@@ -1,23 +1,46 @@
 <template>
     <div>
+        <div>
+            <v-checkbox v-model="isSelectedAll" :half="half">全选</v-checkbox>
+        </div>
         <input v-model="page" style="border:1px solid #ccc;padding:5px;">
-        <v-table :selectedList="selectedList" :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove" @download="download" @toggle="toggle" @changeDuty="changeDuty" @select="selectRow">
+        <v-table :isSelectedAll="isSelectedAll" :selectedList="selectedList" :dataSource="dataSource" :columns="columns" :actions="actions" :status="status" :primaryKey="primaryKey" @remove="remove" @download="download" @toggle="toggle" @select="selectRow" @select-all="selectAll">
         </v-table>
-        <v-page v-show="0 != status" v-model="page" :count="count"></v-page>
+        <v-page v-show="0 != status" v-model="page" :disable="pageDisabled" :count="count"></v-page>
+        <a class="btn btn-default btn-block" @click="popup">确定</a>
     </div>
 </template>
 <script>
 import VNotification from '../components/Dialog/Notification'
 import VTable from './Table2'
 import VPage from '../components/Page'
+import VCheckbox from '../components/form/Checkbox'
 
 export default {
     name: 'testView',
 
-    mounted() {},
+    mounted() {
+
+    },
+
+    computed: {
+
+        pageDisabled() {
+            if (-1 == this.status) {
+                return true;
+            }
+        },
+
+        half() {
+            return this.selectedList.some(bool => {
+                return !bool;
+            });
+        }
+    },
 
     data() {
         return {
+            isSelectedAll: false,
             selectedList: [],
             status: -1,
             page: 0,
@@ -27,14 +50,14 @@ export default {
                 btns: [{
                     event: 'remove',
                     class: 'warning',
-                    text: '删除'
+                    text: '<i class="fa fa-remove"></i> 删除'
                 }, {
                     event: 'toggle',
                     text: ['启用', '禁用'],
                     class: ['success', 'danger'],
                     textIndex: 'toggleIndex'
                 }, {
-                    event: 'changeDuty',
+                    event: 'toggle',
                     text: ['离职', '在职', '兼职'],
                     class: ['default', 'warning', 'danger'],
                     textIndex: 'dutyIndex'
@@ -70,12 +93,29 @@ export default {
     watch: {
         page() {
             this.status = -1;
+            this.isSelectedAll = false;
             this.getTableData().then(response => {});
         }
     },
 
     methods: {
-        selectRow({row, index}){
+        popup() {
+            this.$alert(1234567890, {
+                holdTime: 100000
+            });
+        },
+
+        selectAll(bool) {
+            this.isSelectedAll = bool;
+            this.selectedList = this.selectedList.map(() => {
+                return bool;
+            });
+        },
+
+        selectRow({
+            row,
+            index
+        }) {
             this.selectedList.splice(index, 1, !this.selectedList[index]);
         },
         getTableData() {
@@ -89,26 +129,14 @@ export default {
                     this.status = response.data.status;
                     if (1 == this.status) {
                         this.dataSource = response.data.data.list;
+                        this.selectedList = this.dataSource.map(() => {
+                            return false;
+                        });
                     } else {
                         this.dataSource = [];
                     }
                     resolve(response.data);
                 });
-            });
-        },
-
-        changeDuty({
-            row,
-            index
-        }) {
-            this.$confirm('是否执行该操作?').then(() => {
-                this.status = -1;
-                axios.post('./mock/success').then(response => {
-                    this.dataSource[index].dutyIndex = response.data.data.index;
-                    this.status = 1;
-                });
-            }).catch(() => {
-
             });
         },
 
@@ -119,7 +147,7 @@ export default {
             this.$confirm('是否执行该操作?').then(() => {
                 this.status = -1;
                 axios.post('./mock/success').then(response => {
-                    this.dataSource[index].toggleIndex = response.data.data.index;
+                    this.dataSource[index] = response.data.data.row;
                     this.status = 1;
                 });
             }).catch(() => {
@@ -142,6 +170,7 @@ export default {
                 this.status = -1;
                 axios.post('./mock/success').then(() => {
                     this.status = 1;
+                    this.selectedList.splice(index, 1);
                     this.dataSource.splice(index, 1);
                 });
             }).catch(() => {
@@ -150,9 +179,12 @@ export default {
         }
     },
 
+
+
     components: {
         VNotification,
         VTable,
+        VCheckbox,
         VPage
     }
 }
