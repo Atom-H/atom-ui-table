@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style lang=scss scoped>
+iframe{margin: -15px;}
 .v-enter{
     opacity: 0;
     transform: scale(.1);

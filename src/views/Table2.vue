@@ -94,7 +94,10 @@ export default {
         },
 
         changeCheckbox(row, index) {
-            this.$emit('select', {row, index});
+            this.$emit('select', {
+                row,
+                index
+            });
         }
     },
 

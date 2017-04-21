@@ -1,29 +1,4 @@
 $color: #69c;
 $padding:15px;
 $disable_color: #ccc;
-
-* { margin: 0; padding: 0;-webkit-tap-highlight-color: rgba(0,0,0,0);}
-html { font-size: 100px;width: 100%;height: 100%;overflow: hidden;}
-body {width: 100%; height: 100%;overflow: hidden; background: #fff;  -webkit-text-size-adjust: none; font-family:'微软雅黑'; }
-li { list-style: none; }
-input { border: 0 none; outline: none; }
-a { text-decoration: none; }
-/*a, p, div, span{font-size: .12rem;}*/
-.clearfix { clear: both; }
-
-.mt15{margin-top:15px;}
-
-::selection{background:#69c; color:#fff;} 
-::-moz-selection{background:#69c; color:#fff;} 
-::-webkit-selection{background:#69c; color:#fff;} 
-::-ms-selection{background:#69c; color:#fff;} 
-
-::-webkit-scrollbar{background:#ccc;width: 4px;height: 2px;}
-::-webkit-scrollbar-thumb{background:#777; }
-::-moz-scrollbar{background:#ccc;width: 4px;height: 2px;}
-::-moz-scrollbar-thumb{background:#777; }
-::-ms-scrollbar{background:#ccc;width: 4px;height: 2px;}
-::-ms-scrollbar-thumb{background:#777; }
-[v-cloak] {
-  display: none;
-}
+body{font-family:'微软雅黑';}
