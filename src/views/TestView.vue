@@ -18,7 +18,7 @@ export default {
 
     data() {
         return {
-            selectedList: [true, true, true, false, true],
+            selectedList: [],
             status: -1,
             page: 0,
             count: 10,
@@ -37,7 +37,7 @@ export default {
                     event: 'changeDuty',
                     text: ['离职', '在职', '兼职'],
                     class: ['default', 'warning', 'danger'],
-                    textIndex: 'toggleIndex'
+                    textIndex: 'dutyIndex'
                 }, {
                     event: 'download',
                     text: '下载'
@@ -104,10 +104,8 @@ export default {
             this.$confirm('是否执行该操作?').then(() => {
                 this.status = -1;
                 axios.post('./mock/success').then(response => {
-                    this.dataSource[index].toggleIndex = response.data.data.index;
-                    this.getTableData().then(response => {
-                        this.status = 1;
-                    });
+                    this.dataSource[index].dutyIndex = response.data.data.index;
+                    this.status = 1;
                 });
             }).catch(() => {
 
