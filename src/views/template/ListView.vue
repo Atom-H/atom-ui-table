@@ -4,8 +4,8 @@
             <template v-if="-1 == viewData.status">
                 <v-spinner></v-spinner>
             </template>
-            <div class="r-message" v-if="0 == form.status">
-                <h3>{{form.message}}</h3>
+            <div class="r-message" v-if="0 == viewData.status">
+                <h3>{{viewData.message}}</h3>
                 <a @click="back" class="btn btn-default">
                     <i class="glyphicon glyphicon-return"></i> 返回
                 </a>
