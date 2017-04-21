@@ -29,7 +29,7 @@
             <div class="dd-list-total">加权合计：{{list.listTotal}}</div>
         </template>
 
-        <div class="dd-total">自评总分：{{total}}</div>
+        <div class="dd-total" v-html="total"></div>
         <div class="wrap-drag-btn">
             <v-button v-if="btnshow" @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
             <button class="backbtn" @click="backPage" v-else>返回</button>
