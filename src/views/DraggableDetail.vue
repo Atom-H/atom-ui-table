@@ -77,7 +77,6 @@
                 else{
                     e.target.value=parseFloat(e.target.value)
                 }
-                console.log(444)
 
             },
 //            输入阶段进行的验证
