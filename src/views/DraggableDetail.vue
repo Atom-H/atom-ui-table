@@ -89,7 +89,8 @@
             },
 //            返回上一页
             backPage:function(){
-                window.history.go(-1);
+                this.$router.back()
+//                window.history.go(-1);
             },
             showDetail(_listindex,_index){
 
