@@ -12,7 +12,10 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+$color: #aaa;
 .btn-close {
+    position: relative;
+    z-index: 1986;
     $lineH: 16px;
     $lineW: 2px;
     display: block;
@@ -28,7 +31,7 @@ export default {
             height: $lineH;
             width: $lineW;
             border-radius: 2px;
-            background: #69c;
+            background: $color;
             position: absolute;
             top: 0;
             left: 7px;
