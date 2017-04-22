@@ -1,10 +1,19 @@
 <template>
     <transition name="dialog" @after-leave="afterLeave">
         <div v-show="value" class="component-dialog">
-            <!-- <v-close-button></v-close-button> -->
-            <div class="scroll-view" :style="{maxHeight: height * 0.5 + 'px'}">
+            <div class="header">
+                <v-close-button class="btn-close" @click.native="close"></v-close-button>
+                <slot name="header"></slot>
+            </div>
+            
+            <div class="body" :style="{maxHeight: height * 0.5 + 'px'}">
                 <slot></slot>
             </div>
+
+            <div class="footer">
+                <slot name="footer"></slot>
+            </div>
+
         </div>
     </transition>
 </template>
@@ -15,6 +24,9 @@ export default {
 
     data() {
         return {
+            dialog: {
+                show: false
+            },
             height: 0
         };
     },
@@ -30,6 +42,10 @@ export default {
     },
 
     methods: {
+        close(){
+            this.$emit('input', false);
+        },
+
         afterLeave() {
             this.$emit('after-leave');
         }
@@ -42,16 +58,20 @@ export default {
 </script>
 <style scoped lang="scss">
 .component-dialog {
-    margin: 15% auto;
+    margin: 5% auto;
     max-width: 640px;
     border-radius: 4px;
     background: #fff;
     box-shadow: 1px 2px 5px rgba(0, 0, 0, .2);
-    .scroll-view {
+    .header{padding:15px 15px 0 15px;overflow: hidden;
+        .btn-close{float: right;margin-bottom: 15px;}
+    }
+    .body {
         padding: 0 5px;
         overflow-x: hidden;
         overflow-y: auto;
     }
+    .footer{padding: 15px;}
 }
 
 
