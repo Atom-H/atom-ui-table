@@ -3,6 +3,7 @@
         <div v-show="value" class="component-alert" :style="{width: width}">
             <div class="header">
                 <h1 class="title">{{title}}</h1>
+                <v-close-button class="btn-close" @click.native="ok"></v-close-button>
             </div>
             <div class="body">
                 {{text}}
@@ -14,6 +15,7 @@
     </transition>
 </template>
 <script>
+import VCloseButton from './CloseButton'
 export default {
     name: 'Alert',
 
@@ -23,27 +25,21 @@ export default {
         },
 
         width: {
-            default () {
-                return '400px';
-            }
+            default: '400px'
         },
 
         text: {
-            type: String
+            type: [String, Number]
         },
 
         title: {
             type: String,
-            default () {
-                return '提示';
-            }
+            default: '提示'
         },
 
         holdTime: {
             type: Number,
-            default () {
-                return 3000
-            }
+            default: 3000
         },
 
         lock: {
@@ -104,6 +100,10 @@ export default {
 
             }
         }
+    },
+
+    components: {
+        VCloseButton
     }
 }
 </script>
@@ -117,6 +117,11 @@ export default {
         >.title {
             margin: 0;
             font-size: 16px;
+        }
+        >.btn-close {
+            position: absolute;
+            top: 20px;
+            right: 10px;
         }
     }
     >.body {

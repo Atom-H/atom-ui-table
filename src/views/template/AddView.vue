@@ -120,10 +120,9 @@ export default {
                     this.btnSubmit.loading = false;
                     this.btnSubmit.text = '确定';
 
-                    this.$alert({
+                    this.$alert(response.data.message, {
                         width: '200px',
                         show: true,
-                        text: response.data.message,
                         holdTime: 3000,
                         lock: true,
                         afterLeave: () => {

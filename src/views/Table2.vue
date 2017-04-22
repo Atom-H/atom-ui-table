@@ -9,21 +9,20 @@
             <thead>
                 <tr>
                     <th>
-                        <v-checkbox v-model="isCheckedAll"></v-checkbox>
+                        <v-checkbox :value="isSelectedAll" @input="selectALl" :half="half"></v-checkbox>
                     </th>
-                    <th v-for="th in columns">{{th.text}}</th>
+                    <th v-for="th in columns" v-html="th.text"></th>
                     <th v-if="undefined != actions">{{actions.text}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(row, i) in dataSource" :key="row[primaryKey]">
                     <td>
-                        <v-checkbox :value="selectedList[i]" @input="changeCheckbox(row, i)"></v-checkbox>
+                        <v-checkbox :value="selectedList[i]" @input="select(row, i)"></v-checkbox>
                     </td>
-                    <td v-for="th in columns">{{row[th.key]}}</td>
+                    <td v-for="th in columns" v-html="row[th.key]"></td>
                     <td v-if="undefined != actions" class="actions">
-                        <a v-for="btn in actions.btns" class="btn btn-xs btn-primary" @click="operateRow(btn.event, i)">
-                            {{undefined != btn.textIndex && btn.text[row[btn.textIndex]] || btn.text}}
+                        <a v-for="btn in actions.btns" class="btn btn-xs btn-primary" @click="operateRow(btn.event, i)" v-html="undefined != btn.textIndex && btn.text[row[btn.textIndex]] || btn.text">
                         </a>
                     </td>
                 </tr>
@@ -72,17 +71,16 @@ export default {
 
         selectedList: {
             type: Array
+        },
+
+        isSelectedAll: {
+            type: Boolean,
+            default: false
         }
     },
 
     data() {
-        return {
-            isCheckedAll: false
-        }
-    },
-
-    watch: {
-
+        return {}
     },
 
     methods: {
@@ -93,10 +91,22 @@ export default {
             });
         },
 
-        changeCheckbox(row, index) {
+        select(row, index) {
             this.$emit('select', {
                 row,
                 index
+            });
+        },
+
+        selectALl() {
+            this.$emit('select-all', !this.isSelectedAll);
+        }
+    },
+
+    computed: {
+        half(){
+            return this.selectedList.some(bool=>{
+                return !bool;
             });
         }
     },
