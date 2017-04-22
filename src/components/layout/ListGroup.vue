@@ -92,7 +92,7 @@ $disableColor: #ccc;
         }
     }
     .text-muted {
-        margin-left: 5px;
+        margin-left: 15px;
     }
 }
 </style>

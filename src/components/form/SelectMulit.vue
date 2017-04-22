@@ -11,42 +11,42 @@
                 <template v-else>
                     已选择
                     <a class="text-info">{{selectedOptions.length}}</a> 项
-                    <i class="caret" :class="{rotate: popup.show}"></i>
-                </template>
+            <i class="caret" :class="{rotate: popup.show}"></i>
+            </template>
             </a>
             <a v-if="0 < selectedOptions.length" @click="empty" class="btn btn-default">
                 <i class="fa fa-remove"></i>
             </a>
-        </div>
-        <!-- popup  -->
-        <v-modal v-model="popup.show">
-            <v-dialog v-model="popup.show" style="padding:30px 15px;">
-            <!-- 已选择 -->
+            </div>
+<!-- popup  -->
+<v-modal v-model="popup.show">
+    <v-dialog v-model="popup.show">
+        <!-- 已选择 -->
+        <div slot="header">
             <div class="selected-list">
                 <button @click="selectReverse(option)" v-for="option in selectedOptions" class="btn btn-xs btn-primary">{{option.label}}
                     <i class="fa fa-remove"></i>
                 </button>
             </div>
-            
-            <v-input v-model="keyword" :opts="{placeholder: '输入关键词'}"></v-input> 
-
-            <!-- 选项列表 -->
-            <v-list-group :isGroup="isGroup" :value="value" :list="unSelectedOptions" @clickItem="selectOption">
-            </v-list-group>
-            <div slot="footer" class="btn-group">
-                <a @click="reverse" class="btn btn-default btn-sm">
-                    <i class="fa fa-retweet"></i> 反选
-                </a>
-                <a @click="empty" class="btn btn-default btn-sm">
-                    <i class="fa fa-trash"></i> 清空
-                </a>
-                <a @click="close" class="btn btn-default btn-sm">
-                    <i class="fa fa-remove"></i> 关闭
-                </a>
-            </div>
-            </v-dialog>
-        </v-modal>
-    </div>
+            <v-input v-model="keyword" :opts="{placeholder: '输入关键词'}"></v-input>
+        </div>
+        <!-- 选项列表 -->
+        <v-list-group :isGroup="isGroup" :value="value" :list="unSelectedOptions" @clickItem="selectOption">
+        </v-list-group>
+        <div slot="footer" class="btn-group">
+            <a @click="reverse" class="btn btn-default btn-sm">
+                <i class="fa fa-retweet"></i> 反选
+            </a>
+            <a @click="empty" class="btn btn-default btn-sm">
+                <i class="fa fa-trash"></i> 清空
+            </a>
+            <a @click="close" class="btn btn-default btn-sm">
+                <i class="fa fa-check"></i> 确定
+            </a>
+        </div>
+    </v-dialog>
+</v-modal>
+</div>
 </template>
 <script>
 import VInput from '../form/Input'
@@ -164,7 +164,7 @@ export default {
             this.selectedOptions = [];
             // 如果没有默认值, 那么修改null为[]
             // 同时设置未选择列表为全部列表
-            if(null == this.value) {
+            if (null == this.value) {
                 this.$emit('input', []);
                 return this.opts.children;
             } else {

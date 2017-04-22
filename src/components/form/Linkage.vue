@@ -10,7 +10,7 @@
             </a>
         </div>
         <v-modal v-model="popup.show">
-            <v-dialog v-model="popup.show" style="padding:30px 15px;">
+            <v-dialog v-model="popup.show">
                 <v-tab v-model="activeIndex">
                     <!-- panel -->
                     <v-tab-panel v-for="(page, i) in opts.children" :key="i" :label="page.label" :disabled="!newValues[i] && 0 == group[i].children.length">

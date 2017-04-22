@@ -10,7 +10,7 @@
             </a>
         </div>
         <v-modal v-model="isShowModal">
-            <v-dialog v-model="isShowModal" style="padding:30px 15px;">
+            <v-dialog v-model="isShowModal">
                 <v-tree :value="activeNode" @input="changeTreeValue" :data="opts.data"></v-tree>
             </v-dialog>
         </v-modal>

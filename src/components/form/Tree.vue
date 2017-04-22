@@ -83,7 +83,7 @@ ul.com-tree {
             }
             >a {
                 transition: all .3s;
-                padding: 0 5px;
+                padding: 0 15px;
                 font-size: 14px;
                 line-height: 1.4;
                 margin: 0;

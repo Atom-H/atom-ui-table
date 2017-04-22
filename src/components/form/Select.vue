@@ -12,8 +12,8 @@
         </div>
         <!-- popup -->
         <v-modal v-model="popup.show">
-            <v-dialog v-model="popup.show" style="padding:30px 15px;">
-                <input ref="search" v-model="keyword" type="text" class="search form-control" :placeholder="opts.placeholder">
+            <v-dialog v-model="popup.show">
+                <input slot="header" ref="search" v-model="keyword" type="text" class="search form-control" :placeholder="opts.placeholder">
                 <!-- 选项列表 -->
                 <v-list-group :isGroup="isGroup" :value="value" :list="list" @clickItem="selectOption">
                 </v-list-group>
