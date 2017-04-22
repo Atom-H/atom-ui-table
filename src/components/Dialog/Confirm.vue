@@ -4,9 +4,7 @@
             <div class="header">
                 <h1 class="title">{{title}}</h1>
             </div>
-            <div class="body">
-                {{text}}
-            </div>
+            <div class="body" v-html="text"></div>
             <div class="footer">
                 <a @click="ok" class="btn-ok">确定</a>
                 <a @click="cancel" class="btn-cancel">取消</a>
