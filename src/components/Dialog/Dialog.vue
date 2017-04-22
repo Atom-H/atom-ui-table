@@ -1,6 +1,7 @@
 <template>
     <transition name="dialog" @after-leave="afterLeave">
         <div v-show="value" class="component-dialog">
+            <!-- <v-close-button></v-close-button> -->
             <div class="scroll-view" :style="{maxHeight: height * 0.5 + 'px'}">
                 <slot></slot>
             </div>
@@ -8,6 +9,7 @@
     </transition>
 </template>
 <script>
+import VCloseButton from './CloseButton'
 export default {
     name: 'Dialog',
 
@@ -31,6 +33,10 @@ export default {
         afterLeave() {
             this.$emit('after-leave');
         }
+    },
+
+    components: {
+        VCloseButton
     }
 }
 </script>

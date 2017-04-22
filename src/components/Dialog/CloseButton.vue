@@ -19,7 +19,7 @@ export default {
     height: $lineH;
     width: $lineH;
     >.warp {
-        transition: all .5s;
+        transition: all .3s ease-out;
         height: $lineH;
         width: $lineH;
         position: relative;
@@ -31,7 +31,7 @@ export default {
             background: #69c;
             position: absolute;
             top: 0;
-            left: 0;
+            left: 7px;
         }
         >.line-x {}
         >.line-y {
@@ -39,7 +39,7 @@ export default {
         }
         &:hover {
             cursor: pointer;
-            opacity: .5;
+            transform: rotate(-135deg) scale(1.1);
         }
     }
 }
