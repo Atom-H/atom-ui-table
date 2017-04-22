@@ -100,9 +100,12 @@ export default {
 
     methods: {
         popup() {
-            this.$alert(1234567890, {
+            // this.$alert(1986, {holdTime: 3000}).then(()=>{
+            //     this.$alert(1989)
+            // });
+            this.$confirm(1234567890, {
                 holdTime: 100000
-            });
+            }).then(()=>{}).catch(()=>{});
         },
 
         selectAll(bool) {

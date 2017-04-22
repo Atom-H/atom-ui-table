@@ -16,58 +16,41 @@ plugin.install = (Vue, options) => {
     // =================================================
     Vue.prototype.$alert = (text = '', options = {}) => {
         return new Promise((resolve, reject) => {
-                vm.modal.show = true;
-                vm.alert = {
-                    ...vm.alert,
-                    ...options,
-                    ok: () => {
-                        vm.modal.show = false;
-                        resolve();
-                    },
-                    text,
-                    show: true
-                };
+            vm.modal.show = true;
+            vm.alert = {
+                ...vm.alert,
+                ...options,
+                ok: () => {
+                    vm.modal.show = false;
+                    resolve();
+                },
+                show: true
+                ,text
+                
+            };
         });
     };
     // =================================================
     // ==============组件内调用: this.$confirm============
     // =================================================
-    Vue.prototype.$confirm = (options = {}) => {
+    Vue.prototype.$confirm = (text = '', options = {}) => {
         return new Promise((resolve, reject) => {
-            if ('string' == typeof(options) || 'number' == typeof(options)) {
-                vm.modal.show = true;
-                vm.confirm = {
-                    ...vm.confirm,
-                    show: true,
-
-                    ok: () => {
-                        vm.modal.show = false;
-                        resolve();
-                    },
-
-                    cancel: () => {
-                        vm.modal.show = false;
-                        reject();
-                    },
-
-                    text: options
-                };
-            } else {
-                vm.modal.show = true;
-                vm.confirm = {
-                    ...vm.confirm,
-                    ...options,
-                    ok: () => {
-                        vm.modal.show = false;
-                        resolve();
-                    },
-                    cancel: () => {
-                        vm.modal.show = false;
-                        reject();
-                    },
-                    show: true
-                };
+            vm.modal.show = true;
+            vm.confirm = {
+                ...vm.alert,
+                ...options,
+                ok: () => {
+                    vm.modal.show = false;
+                    resolve();
+                },
+                cancel: () => {
+                    vm.modal.show = false;
+                    reject();
+                },
+                show: true,
+                text
             };
+
         });
     };
 }

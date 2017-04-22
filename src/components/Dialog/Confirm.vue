@@ -28,7 +28,7 @@ export default {
         },
 
         text: {
-            type: String
+            type: [String, Number]
         },
 
         title: {
