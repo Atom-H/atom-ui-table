@@ -1,9 +1,10 @@
 <template>
     <div class="component-notification">
-        <slot></slot>
+        <notification-item v-for="(item, i) in list" :key="i" :content="item.content"></notification-item>
     </div>
 </template>
 <script>
+import notificationItem from './Item';
 export default {
     name: 'Notification',
 
@@ -15,30 +16,25 @@ export default {
 
     data() {
         return {
-            timer: null
+            list: []
         };
     },
 
     methods: {
-        ok() {
-            this.$emit('input', false);
-        }
-    },
-
-    computed: {
 
     },
 
-    watch: {
-
+    components: {
+        notificationItem
     }
 }
 </script>
 <style scoped lang="scss">
 .component-notification {
-    padding: 15px;
-    border-radius: 4px;
-    background: #fff;
+    position: fixed;
+    z-index: 1989;
+    top: 15px;
+    right: 15px;
 }
 
 // 动画
