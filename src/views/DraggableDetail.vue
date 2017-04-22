@@ -2,7 +2,7 @@
     <div class="d-detail">
         <div class="d-name" v-html="name"></div>
         <template v-for="(list,listindex) in dataVal">
-            <h2 class="dd-title"><i class="fa fa-bar-chart fa-pos"></i>{{list.title}}</h2>
+            <h2 class="dd-title"><i class="fa fa-bar-chart fa-pos"></i><span v-html="list.title"></span></h2>
             <!--一个列表项-->
             <template v-for="(item,index) in list.listData">
                 <div class="dd-list">
