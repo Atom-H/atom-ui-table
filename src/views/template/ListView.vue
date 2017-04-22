@@ -4,7 +4,7 @@
             <template v-if="-1 == viewData.status">
                 <v-spinner></v-spinner>
             </template>
-            <div class="r-message" v-if="0 == viewData.status">
+            <div v-else-if="0 == viewData.status" class="r-message">
                 <h3>{{viewData.message}}</h3>
                 <a @click="back" class="btn btn-default">
                     <i class="glyphicon glyphicon-return"></i> 返回
@@ -164,7 +164,7 @@ export default {
                 this.setDefaultValue();
                 // 之后根据默认值, 渲染表格数据
                 this.httpGetTable();
-                
+
             }
         }
     },
@@ -356,11 +356,13 @@ export default {
     transition: all .5s;
     transform: translateY(-.5rem);
 }
-.r-message{
-    text-align:center;
+
+.r-message {
+    text-align: center;
 }
-.r-message h3{
+
+.r-message h3 {
     font-family: "Microsoft YaHei UI";
-    padding:10px 0px;
+    padding: 10px 0px;
 }
 </style>

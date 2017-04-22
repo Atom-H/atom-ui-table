@@ -5,7 +5,7 @@
             <v-spinner v-if="-1 == form.status">
             </v-spinner>
             <!-- 页面加载完毕 -->
-            <div class="r-message" v-if="0 == form.status">
+            <div v-else-if="0 == form.status" class="r-message">
                 <h3>{{form.message}}</h3>
                 <a @click="back" class="btn btn-default">
                     <i class="glyphicon glyphicon-return"></i> 返回
@@ -195,11 +195,13 @@ export default {
     transition: all .5s;
     transform: translateY(-.5rem);
 }
-.r-message{
-    text-align:center;
+
+.r-message {
+    text-align: center;
 }
-.r-message h3{
+
+.r-message h3 {
     font-family: "Microsoft YaHei UI";
-    padding:10px 0px;
+    padding: 10px 0px;
 }
 </style>
