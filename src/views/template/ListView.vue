@@ -4,6 +4,12 @@
             <template v-if="-1 == viewData.status">
                 <v-spinner></v-spinner>
             </template>
+            <div class="r-message" v-if="0 == viewData.status">
+                <h3>{{viewData.message}}</h3>
+                <a @click="back" class="btn btn-default">
+                    <i class="glyphicon glyphicon-return"></i> 返回
+                </a>
+            </div>
             <div v-else>
                 <!-- 面包屑 -->
                 <v-breadcrumb v-if="undefined != viewData.data.breadcrumb" :value="viewData.data.breadcrumb"></v-breadcrumb>
@@ -349,5 +355,12 @@ export default {
     opacity: 0;
     transition: all .5s;
     transform: translateY(-.5rem);
+}
+.r-message{
+    text-align:center;
+}
+.r-message h3{
+    font-family: "Microsoft YaHei UI";
+    padding:10px 0px;
 }
 </style>

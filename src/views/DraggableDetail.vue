@@ -7,26 +7,37 @@
             <template v-for="(item,index) in list.listData">
                 <div class="dd-list">
                     <span class="dd-index">{{index+1}}</span>
-                    <span class="dd-name" v-html="item.listName"></span>
-                    <span class="dd-percent" v-html="item.listPercent"></span>
-                    <span class="dd-tag" @click="showDetail(listindex,index)">{{item.listTag}}<i class="fa fa-sort-desc"></i></span>
-                    <div class="dd-tag-dec" v-show="index==i&&listindex==j" v-html="item.listTagDetail">{{item.listSelfVal}}</div>
+                    <span class="dd-name" v-html="item.name"></span>
+                    <span class="dd-percent" v-html="item.percent"></span>
+                    <span class="dd-tag" @click="showDetail(listindex,index)">{{item.tag}}<i class="fa fa-sort-desc"></i></span>
+                    <div class="dd-tag-dec" v-show="index==i&&listindex==j" v-html="item.tagDetail">{{item.ratingScore}}</div>
                 </div>
-                <div class="dd-detail" v-html="item.listDetail"></div>
-                <div class="dd-more" v-html="item.listMore"></div>
-                <div class="dd-self-percent">
-                    <div class="fl">{{item.listSelf}}</div>
+                <div class="dd-detail" v-html="item.detail"></div>
+                <div class="dd-more" v-html="item.more"></div>
+                <div class="dd-self-percent" v-if="item.ratingShow == true">
+                    <div class="fl">{{item.ratingText}}</div>
                     <div class="fr">
-                        <input :readonly="item.listIptReadOnly"
-                                type="text"
-                                placeholder="0"
-                                v-model="item.listSelfVal"
-                                @keyup="numFun"
-                                @blur="testNum">
+                        <input :readonly="item.ratingEdit"
+                               type="text"
+                               placeholder="0"
+                               v-model="item.ratingScore"
+                               @keyup="numFun"
+                               @blur="testNum">
+                    </div>
+                </div>
+                <div class="dd-self-percent" v-if="item.leaderShow == true">
+                    <div class="fl">{{item.leaderText}}</div>
+                    <div class="fr">
+                        <input :readonly="item.leaderEdit"
+                               type="text"
+                               placeholder="0"
+                               v-model="item.leaderScore"
+                               @keyup="numFun"
+                               @blur="testNum">
                     </div>
                 </div>
             </template>
-            <div class="dd-list-total">加权合计：{{list.listTotal}}</div>
+            <div class="dd-list-total">加权合计：{{list.total}}</div>
         </template>
 
         <div class="dd-total" v-html="total"></div>
@@ -72,7 +83,7 @@
 
                 if(!r.test(e.target.value)){
                     e.target.value='';
-                    alert("请输入0到100之间的数字，最多含两位小数")
+                    //alert("请输入0到100之间的数字，最多含两位小数")
                 }
                 else{
                     e.target.value=parseFloat(e.target.value)
@@ -185,7 +196,7 @@
         }
         .dd-list{
             line-height: 26px;
-            margin-bottom: 20px;
+            padding-bottom: 20px;
             position: relative;
             border-top: 1px dashed #e8e8e8;
             padding-top: 10px;
@@ -238,6 +249,7 @@
         }
         .dd-more{
             margin-top: 10px;
+            margin-bottom:10px;
             color: #333;
         }
         .dd-self-percent{
