@@ -1,20 +1,23 @@
 <template>
     <div class="view-ranking">
         <div class="r-title">{{title}}</div>
-        <transition-group name="no" type="transition" class="drap-wrap" tag="ul" ref='myUl'>
-            <li v-for="(item, index) in lists" :key="item.id">
-                <div class="col-md-10">
-                    <div class="ranking-number">No.{{index+1}}</div>
-                    <img :src="item.avatar" class="avarar">
-                    <div class="user-info">
-                        <p>{{item.name}}</p>
-                        <p>{{item.dept}}</p>
-                        <p>{{item.position}}</p>
+        <div v-if="status == 1">
+            <transition-group name="no" type="transition" class="drap-wrap" tag="ul" ref='myUl'>
+                <li v-for="(item, index) in lists" :key="item.id">
+                    <div class="col-md-10">
+                        <div class="ranking-number">No.{{index+1}}</div>
+                        <img :src="item.avatar" class="avarar">
+                        <div class="user-info">
+                            <p>{{item.name}}</p>
+                            <p>{{item.dept}}</p>
+                            <p>{{item.position}}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2" v-html="item.medal"></div>
-            </li>
-        </transition-group>
+                    <div class="col-md-2" v-html="item.medal"></div>
+                </li>
+            </transition-group>
+        </div>
+        <div v-else v-html="message" class="no-record"></div>
     </div>
 </template>
 <script>
@@ -25,6 +28,8 @@ export default {
         this.httpGetBaseView(response => {
             this.lists = response.data.data.lists;
             this.title = response.data.data.title;
+            this.status = response.data.status;
+            this.message = response.data.message;
         });
     },
     methods:{
@@ -151,6 +156,9 @@ export default {
             li:last-child{
                 border-bottom:0px;
             }
+        }
+        .no-record{
+            text-align: center;
         }
     }
 </style>
