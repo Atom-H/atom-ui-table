@@ -16,7 +16,7 @@ export default {
 
     methods: {
         popup() {
-            this.$notify('随机' + Math.random())
+            this.$notify('ID: ')
             // this.$confirm(1234567890, {
             //     holdTime: 100000
             // }).then(() => {}).catch(() => {});

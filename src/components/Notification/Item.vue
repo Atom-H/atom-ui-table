@@ -1,20 +1,23 @@
 <template>
-    <transition name="notification">
-        <div v-if="!isClose" class="notification-item">
-            <div class="scope">
-                <v-close @click.native="close" class="close"></v-close>
-                <a :class="['title', link && 'link']" v-html="title"></a>
-                <p class="content" v-html="content"></p>
-            </div>
+    <div v-if="!isClose" class="notification-item">
+        <div class="scope">
+            <v-close @click.native="close" class="close"></v-close>
+            <a :class="['title', link && 'link']" v-html="title"></a>
+            <!-- <a class="countdown">{{' ' + countDown + 's'}}</a> -->
+            <p class="content" v-html="content + id"></p>
         </div>
-    </transition>
+    </div>
 </template>
 <script>
 import VClose from '../Static/CloseButton'
 export default {
-    name: 'Item',
+    name: 'notificationItem',
 
     props: {
+        id: {
+            type: Number
+        },
+
         link: {
             type: Boolean,
             default: false
@@ -25,7 +28,9 @@ export default {
             default: '通知'
         },
 
-        content: {},
+        content: {
+            type: [String, Number]
+        },
 
         holdTime: {
             type: Number,
@@ -35,19 +40,29 @@ export default {
 
     data() {
         return {
+            countDown: 0,
             isClose: false
         }
     },
 
     mounted() {
         setTimeout(() => {
-            this.isClose = true;
+            this.$emit('close', this.id);
         }, this.holdTime);
+
+        var time = Math.ceil((this.holdTime - 1000) / 1000);
+        this.countDown = time;
+        setInterval(()=> {
+            if(0 < time) {
+                time--; 
+                this.countDown = time;
+            }
+        }, 1000);
     },
 
     methods: {
         close() {
-            this.$emit('close')
+            this.$emit('close', this.id);
         }
     },
 
@@ -55,11 +70,11 @@ export default {
         VClose
     }
 
-
 }
 </script>
 <style scoped lang="scss">
 .notification-item {
+    transition: all .5s;
     width: 320px;
     margin: 15px 0;
     border-radius: 4px;
@@ -79,6 +94,7 @@ export default {
             color: #222;
             text-decoration: none;
         }
+        .countdown{color: #ccc;font-size: 14px;}
         .link {
             &:hover {
                 text-decoration: underline;
@@ -92,37 +108,6 @@ export default {
             padding: 0;
             margin: 5px 0;
         }
-    }
-}
-
-// 动画
-.notification-enter-active {
-    animation: notification-in .5s;
-}
-
-.notification-leave-active {
-    animation: notification-out .5s;
-}
-
-@keyframes notification-in {
-    0% {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes notification-out {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(15px);
     }
 }
 </style>

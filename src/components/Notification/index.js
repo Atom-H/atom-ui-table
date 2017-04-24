@@ -13,12 +13,13 @@ plugin.install = (Vue, options) => {
     // =================================================
     // ==============组件内调用: this.$notify==============
     // =================================================
+    var id = 0;
     Vue.prototype.$notify = (content = '', options = {}) => {
+        id++;
         return new Promise((resolve, reject) => {
-            vm.list = [...vm.list, {content, _rand: Math.random()}];
+            vm.list = [...vm.list, {content, id}];
         });
     };
-
 }
 
 export default plugin;
