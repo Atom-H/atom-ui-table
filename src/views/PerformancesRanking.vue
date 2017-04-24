@@ -1,10 +1,10 @@
 <template>
     <div class="view-ranking">
-        <div class="r-title">2017年12月绩效考核排行榜</div>
+        <div class="r-title">{{title}}</div>
         <transition-group name="no" type="transition" class="drap-wrap" tag="ul" ref='myUl'>
             <li v-for="(item, index) in lists" :key="item.id">
                 <div class="col-md-10">
-                    <div class="ranking-number">No.{{index}}</div>
+                    <div class="ranking-number">No.{{index+1}}</div>
                     <img :src="item.avatar" class="avarar">
                     <div class="user-info">
                         <p>{{item.name}}</p>
@@ -12,9 +12,7 @@
                         <p>{{item.position}}</p>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    {{item.medal}}
-                </div>
+                <div class="col-md-2" v-html="item.medal"></div>
             </li>
         </transition-group>
     </div>
@@ -25,7 +23,8 @@ export default {
 
     created(){
         this.httpGetBaseView(response => {
-            this.lists = response.data.lists;
+            this.lists = response.data.data.lists;
+            this.title = response.data.data.title;
         });
     },
     methods:{
@@ -43,13 +42,20 @@ export default {
 
     data() {
         return {
-            lists: {
-                id:0,
-                avatar:'',
-                name:'',
-                dept:'',
-                position:'',
-                medal:''
+            lists: [],
+            title: '',
+            message: '',
+            status: 0,
+            data: {
+                title:'',
+                lists: {
+                    id:0,
+                    avatar:'',
+                    name:'',
+                    dept:'',
+                    position:'',
+                    medal:''
+                }
             }
         }
     },
