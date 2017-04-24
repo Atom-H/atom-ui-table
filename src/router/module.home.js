@@ -86,14 +86,15 @@ export var routes = [
             component: resolve => {
             require.ensure(['../views/template2/ListView'], () => {
                 resolve(require('../views/template2/ListView'))
-        });
+            });
         }
     }, {
         path: 'performances/ranking',
             component: resolve => {
             require.ensure(['../views/PerformancesRanking'], () => {
                 resolve(require('../views/PerformancesRanking'))
-        });
-        }
+            });
+        },
+        name: 'PerformancesRanking'
     }
 ]
