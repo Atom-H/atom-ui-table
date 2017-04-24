@@ -1,7 +1,8 @@
 <template>
-    <div class="component-notification">
-        <notification-item v-for="(item, i) in list" :key="i" :content="item.content"></notification-item>
-    </div>
+    <transition-group class="component-notification" name="list" tag="div">
+        <notification-item v-for="(item, i) in list" :key="item.id" :content="item.content" :id="item.id" @close="removeItem">
+        </notification-item>
+    </transition-group>
 </template>
 <script>
 import notificationItem from './Item';
@@ -21,7 +22,11 @@ export default {
     },
 
     methods: {
-
+        removeItem(id) {
+            this.list = this.list.filter(item => {
+                return id == item.id ? false : true;
+            });              
+        }
     },
 
     components: {
@@ -35,36 +40,17 @@ export default {
     z-index: 1989;
     top: 15px;
     right: 15px;
+    width: 320px;
 }
 
 // 动画
-.notification-enter-active {
-    animation: notification-in .5s;
+.list-enter{
+  opacity: 0;
+  transform: translateX(100px);
 }
-
-.notification-leave-active {
-    animation: notification-out .5s;
-}
-
-@keyframes notification-in {
-    0% {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes notification-out {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(15px);
-    }
+.list-leave-active {
+      opacity: 0;
+      transform: translateY(-15px);
+  position: absolute;
 }
 </style>
