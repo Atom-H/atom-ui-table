@@ -104,9 +104,10 @@
 //            输入阶段进行的验证
             numFun:function(e){
                 if(parseInt(e.target.value)>=100){
-                    return e.target.value=100
+                    return e.target.value = 100
                 }
                 e.target.value=e.target.value.replace(/^[.]+/,'')
+                e.target.value=e.target.value.replace(/\b(0+)/gi,'')
                 e.target.value=e.target.value.replace(/[^0-9.]/g,'')
             },
 //            返回上一页
