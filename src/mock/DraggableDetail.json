@@ -7,6 +7,16 @@
     "url":"./mock/success",
     "name":"这里是一段标题这里是一段标题",
     "btnshow":false,
+    "leader":{
+      "title":"上级评语",
+      "disable":true,
+      "reamark":"asd"
+    },
+    "rating":{
+      "title":"自评备注",
+      "disable":false,
+      "reamark":"asd"
+    },
     "mockData":[
       {
         "title":"业绩指标",
