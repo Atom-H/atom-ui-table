@@ -42,11 +42,11 @@
 
         <div class="dd-remark" v-if="rating">
             <h4>{{rating.title}}</h4>
-            <textarea class="form-control" rows="5" name="ratingRemark" :disabled="rating.disable">{{rating.remark}}</textarea>
+            <textarea class="form-control" rows="5" v-model="rating.remark" :disabled="rating.disable">{{rating.remark}}</textarea>
         </div>
         <div class="dd-remark" v-if="leader">
             <h4>{{leader.title}}</h4>
-            <textarea class="form-control" rows="5" name="leaderRemark" :disabled="leader.disable">{{leader.remark}}</textarea>
+            <textarea class="form-control" rows="5" v-model="leader.remark" :disabled="leader.disable">{{leader.remark}}</textarea>
         </div>
 
         <div class="dd-total" v-html="total"></div>
@@ -147,6 +147,8 @@
                 axios.post(this.url, qs.stringify(
                     {
                         "data":this.dataVal,
+                        "leader":this.leader,
+                        "rating":this.rating,
                         "query":this.query,
                     }
 
