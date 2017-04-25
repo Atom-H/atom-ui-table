@@ -2,7 +2,7 @@
     <transition name="confirm" @after-leave="afterLeave">
         <div v-show="value" class="component-confirm" :style="{width: width}">
             <div class="header">
-                <h1 class="title">{{title}}</h1>
+                <h1 class="title" v-html="title"></h1>
             </div>
             <div class="body" v-html="text"></div>
             <div class="footer">
@@ -94,7 +94,7 @@ export default {
         @mixin btn() {
             margin-right: 5px;
             float: right;
-            padding:5px 15px;
+            padding: 5px 15px;
             border-radius: 4px;
             cursor: pointer;
             letter-spacing: 1px;
@@ -104,12 +104,12 @@ export default {
             }
         }
         .btn-ok {
-            border:1px solid #69c;
+            border: 1px solid #69c;
             color: #69c;
             @include btn();
         }
         .btn-cancel {
-            border:1px solid #999;
+            border: 1px solid #999;
             color: #999;
             @include btn();
         }

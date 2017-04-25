@@ -6,12 +6,13 @@
             </div>
             <div class="body" v-html="text"></div>
             <div class="footer">
-                <a @click="ok" class="btn-ok">{{btnOkText}}</a>
+                <v-button @click="ok" type="primary" style="float: right;">{{btnOkText}}</v-button>
             </div>
         </div>
     </transition>
 </template>
 <script>
+import VButton from '../form/Button'
 export default {
     name: 'Alert',
 
@@ -96,7 +97,9 @@ export default {
 
             }
         }
-    }
+    },
+
+    components: {VButton}
 }
 </script>
 <style scoped lang="scss">
@@ -122,22 +125,6 @@ export default {
     >.footer {
         padding: 15px;
         overflow: hidden;
-        @mixin btn() {
-            float: right;
-            padding: 5px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            letter-spacing: 1px;
-            &:hover {
-                text-decoration: none;
-                opacity: .7;
-            }
-        }
-        .btn-ok {
-            border: 1px solid #69c;
-            color: #69c;
-            @include btn();
-        }
     }
 }
 
