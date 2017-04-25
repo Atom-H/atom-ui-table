@@ -47,7 +47,7 @@ export var routes = [
             });
         }
     }, {
-        path: '*/(.)*(edit|save|view|operate|setting|config|put)+(.)*',
+        path: '*/(.)*(edit|save|view|operate|setting|config|put|change|set|detail)+(.)*',
         component: resolve => {
             require.ensure(['../views/template/EditView'], () => {
                 resolve(require('../views/template/EditView'))
