@@ -16,7 +16,7 @@
             }
         }, {
             "title": "编辑器",
-            "value": null,
+            "value": "<p><span style=\"font-size: 142px;color:#f10;\">确保制作结果满意度达到总监要求</span></p>",
             "name": "editor",
             "column": [12, 12, 12, 12],
             "is": "editor",
