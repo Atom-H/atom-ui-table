@@ -1,0 +1,31 @@
+{
+  "message": "无数据",
+  "status": 1,
+  "data": {
+    "title": "2017年12月绩效考核排行榜",
+    "lists": [
+      {
+        "id": "1",
+        "avatar": "https://cn.vuejs.org/images/logo.png",
+        "name": "周鼎 Habit",
+        "dept": "信息技术部",
+        "position": "PHP高级工程师",
+        "medal": "<img src=\"http://113.6.252.23:6688/static/images/medal_1.png\" class=\"medal\">"
+      },{
+        "id": "1",
+        "avatar": "https://cn.vuejs.org/images/logo.png",
+        "name": "周鼎 Habit",
+        "dept": "信息技术部",
+        "position": "PHP高级工程师",
+        "medal": "<img src=\"http://113.6.252.23:6688/static/images/medal_1.png\" class=\"medal\">"
+      },{
+        "id": "1",
+        "avatar": "https://cn.vuejs.org/images/logo.png",
+        "name": "周鼎 Habit",
+        "dept": "信息技术部",
+        "position": "PHP高级工程师",
+        "medal": "<img src=\"http://113.6.252.23:6688/static/images/medal_1.png\" class=\"medal\">"
+      }
+    ]
+  }
+}

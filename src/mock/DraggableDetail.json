@@ -6,7 +6,17 @@
     "query":"querystring",
     "url":"./mock/success",
     "name":"这里是一段标题这里是一段标题",
-    "btnshow":false,
+    "btnshow":true,
+    "leader":{
+      "title":"上级评语",
+      "disable":true,
+      "remark":"asd"
+    },
+    "rating":{
+      "title":"自评备注",
+      "disable":false,
+      "remark":"asd"
+    },
     "mockData":[
       {
         "title":"业绩指标",

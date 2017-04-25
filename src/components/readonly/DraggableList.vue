@@ -11,6 +11,9 @@
                             @click="tabChange(index)"
                             class="tag"
                             :class="{current:active==index}">{{tag}}</span>
+                    <div class="search-btn">
+                        <input class="drag-query" v-model="query" placeholder="搜索"/>
+                    </div>
                 </div>
             </div>
             <draggable
@@ -25,7 +28,7 @@
                         type="transition"
                         class="list-group"
                         :name="'flip-list'" tag="ul">
-                    <li class="list-group-item" v-show="element.type==active" v-for="element in list" :key="element.id">
+                    <li class="list-group-item" v-show="element.type==active" v-for="element in computedList" :key="element.id">
                         <div class="drag-contain">
                             <h5>
                                 <i :class="element.fixed? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
@@ -57,7 +60,7 @@
                                 {{element.name}}
                             </h5>
                             <p class="drag-detail" v-html="element.detail"></p>
-                            <textarea placeholder="请填写考核目标要求" v-model="element.textAreaVal"></textarea>
+                            <textarea placeholder="请填写考核标准" v-model="element.textAreaVal"></textarea>
                             <div>设置权重：<input class="drag-ipt-s" type="text" v-model="element.iptVal">%</div>
                             <span class="close-btn" @click="removeItem(index,element)">
                                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -84,6 +87,7 @@
         },
         data () {
             return {
+                query: '',
                 active:0,
                 list:[],
                 list2:[],
@@ -168,6 +172,12 @@
             },
             list2String(){
                 return JSON.stringify(this.list2, null, 2);
+            },
+            computedList: function () {
+                var vm = this;
+                return this.list.filter(function (element) {
+                    return element.name.indexOf(vm.query) !== -1
+                })
             }
         },
         watch: {
@@ -402,4 +412,26 @@
             opacity: .8;
         }
     }
+    .search-btn{
+        position: relative;
+        padding-bottom: 10px;
+        .drag-query{
+            border: 1px solid #cdcdcd;
+            height: 24px;
+            line-height: 24px;
+            width: 150px;
+            border-radius: 4px;
+            padding: 0 5px;
+            font-size: 12px;
+        }
+        .fa{
+            position: absolute;
+            left: 0;
+            top:2px;
+            font-size: 14px;
+            color: #ddd;
+            user-select: none;
+        }
+    }
+
 </style>
