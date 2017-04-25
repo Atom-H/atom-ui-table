@@ -51,6 +51,10 @@ Vue.config.productionTip = false;
 import Dialog from './components/Dialog';
 Vue.use(Dialog)
 
+import Notification from './components/Notification';
+Vue.use(Notification)
+
+
 /* eslint-disable no-new */
 new Vue({
     store,

@@ -32,6 +32,17 @@ module.exports = function(express, app) {
     });
 
     /*
+     * 绩效排行榜
+     */
+    app.get('/mock/performances/ranking', function(req, res) {
+        var data = fs.readFileSync('./src/mock/PerformancesRanking.json', 'utf8');
+        var json = JSON.parse(data);
+        setTimeout(() => {
+            res.send(JSON.stringify(json, null, 4));
+        }, 300);
+    });
+
+    /*
      * 拖拽列表数据
      */
     app.get('/mock/performances/draggable', function(req, res) {

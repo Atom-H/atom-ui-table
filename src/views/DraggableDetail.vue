@@ -40,6 +40,15 @@
             <div class="dd-list-total">加权合计：{{list.total}}</div>
         </template>
 
+        <div class="dd-remark" v-if="rating">
+            <h4>{{rating.title}}</h4>
+            <textarea class="form-control" rows="5" v-model="rating.remark" :disabled="rating.disable">{{rating.remark}}</textarea>
+        </div>
+        <div class="dd-remark" v-if="leader">
+            <h4>{{leader.title}}</h4>
+            <textarea class="form-control" rows="5" v-model="leader.remark" :disabled="leader.disable">{{leader.remark}}</textarea>
+        </div>
+
         <div class="dd-total" v-html="total"></div>
         <div class="wrap-drag-btn">
             <v-button v-if="btnshow" @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
@@ -62,6 +71,8 @@
                 this.name = response.data.data.name;
                 this.total = response.data.data.total;
                 this.btnshow = response.data.data.btnshow;
+                this.leader = response.data.data.leader;
+                this.rating = response.data.data.rating;
             });
         },
         computed:{
@@ -93,9 +104,10 @@
 //            输入阶段进行的验证
             numFun:function(e){
                 if(parseInt(e.target.value)>=100){
-                    return e.target.value=100
+                    return e.target.value = 100
                 }
                 e.target.value=e.target.value.replace(/^[.]+/,'')
+                e.target.value=e.target.value.replace(/\b(0+)/gi,'')
                 e.target.value=e.target.value.replace(/[^0-9.]/g,'')
             },
 //            返回上一页
@@ -136,6 +148,8 @@
                 axios.post(this.url, qs.stringify(
                     {
                         "data":this.dataVal,
+                        "leader":this.leader,
+                        "rating":this.rating,
                         "query":this.query,
                     }
 
@@ -161,6 +175,16 @@
                 name:"",
                 total:"",
                 btnshow:true,
+                leader:{
+                    title:'',
+                    disable: true,
+                    remark: ''
+                },
+                rating:{
+                    title:'',
+                    disable: true,
+                    remark: ''
+                },
                 backData:'',
                 btnSubmit: {
                     disabled: false,

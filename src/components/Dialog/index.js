@@ -1,16 +1,17 @@
-import MessageBus from './MessageBus'
+import DialogServer from './DialogServer'
 
 var plugin = {};
 plugin.install = (Vue, options) => {
     // Vue.component('VPrompt', Prompt);
     // document.createDocumentFragment()
-    var MessageBusComponent = Vue.extend(MessageBus);
+    var DialogServerComponent = Vue.extend(DialogServer);
     // 创建一个挂载点
     var node = document.createElement('div');
-    node.id = '_v-dialog';
+    // 起个不重复的名字
+    node.id = '_app-dialog-' + Math.ceil(Math.random());
     document.body.appendChild(node);
     // 挂载
-    var vm = new MessageBusComponent().$mount('#_v-dialog');
+    var vm = new DialogServerComponent().$mount('#' + node.id);
     // =================================================
     // ==============组件内调用: this.$alert==============
     // =================================================
@@ -24,9 +25,9 @@ plugin.install = (Vue, options) => {
                     vm.modal.show = false;
                     resolve();
                 },
-                show: true
-                ,text
-                
+                show: true,
+                text
+
             };
         });
     };
