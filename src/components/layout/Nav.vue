@@ -61,7 +61,7 @@ export default {
                         Push.create(item.title, {
                             body: `[${[item.create_time]}] ${item.desc}`,
                             icon: item.icon,
-                            timeout: 4000,
+                            timeout: 1800000,
                             onClick: () => {
                                 this.$router.push({
                                     path: item.path,

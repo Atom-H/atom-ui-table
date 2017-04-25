@@ -6,7 +6,7 @@
             </div>
             <div class="body" v-html="text"></div>
             <div class="footer">
-                <v-button @click="ok" type="primary" style="float: right;">{{btnOkText}}</v-button>
+                <v-button @click="ok" type="ghost" style="float: right;">{{btnOkText}}</v-button>
             </div>
         </div>
     </transition>

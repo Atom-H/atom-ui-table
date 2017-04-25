@@ -1,7 +1,7 @@
 <template>
     <span :class="['com-button com-button-' + type, !!disabled && 'disabled']" @click="click" @mouseleave="mouseleave" @mouseenter="mouseenter">
         <!-- 背景动画 -->
-        <i v-if="icon" v-show="!loading" :class="['fa', 'fa-'+icon]"></i>
+        <v-icon v-if="icon" v-show="!loading" :value="icon"></v-icon>
         <span v-show="openText">
             <slot></slot>
             <i v-show="loading" class="fa fa-spinner fa-spin"></i>
@@ -9,6 +9,7 @@
     </span>
 </template>
 <script>
+import VIcon from '../Base/Icon'
 export default {
     name: 'button',
 
@@ -43,12 +44,12 @@ export default {
 
     mounted() {
         var type = this.$el.getAttribute('type');
-        if(!!type) {
+        if (!!type) {
             this.type = type;
         }
 
         var icon = this.$el.getAttribute('icon');
-        if(!!type) {
+        if (!!type) {
             this.icon = icon;
         }
     },
@@ -69,19 +70,17 @@ export default {
         click() {
             this.$emit('click');
         }
-    }
+    },
+
+    components: {VIcon}
 }
 </script>
 <style scoped lang="scss">
-$default: #777;
-$primary: #69c;
-$success: #5cb85c;
-$warning: #f0ad4e;
-$danger: #d9534f;
-$disabled: #ccc;
+@import '../../scss/theme.scss';
 @mixin button($type) {
-    border: 1px solid $type;
-    color: $type;
+    background: $type;
+    border-color: rgba($type, 1);
+    color: #fff;
     &:hover {
         opacity: .7;
     }
@@ -92,7 +91,6 @@ $disabled: #ccc;
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    touch-action: manipulation;
     user-select: none;
     border-radius: 4px;
     display: inline-block;
@@ -106,10 +104,20 @@ $disabled: #ccc;
     letter-spacing: 1px;
     text-decoration: none;
     transition: .2s;
+    border: 1px solid transparent;
 }
+
 
 .com-button-default {
     @include button($default);
+    color: $default;
+    background: #fff;
+}
+
+.com-button-ghost {
+    @include button($base);
+    color: $base;
+    background: #fff;
 }
 
 .com-button-primary {
@@ -128,10 +136,17 @@ $disabled: #ccc;
     @include button($danger);
 }
 
-.com-button-disabled {
-    @include button($disabled);
+.com-button-info {
+    @include button($info);
+}
+
+.disabled {
+    color: #c3cbd6;
+    background-color: #f7f7f7;
+    border: 1px solid #d7dde4;
     &:hover {
-        cursor: auto;
+        cursor: not-allowed;
+        opacity: 1;
     }
 }
 
