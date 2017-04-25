@@ -1,11 +1,12 @@
 <template>
-    <a :class="['com-button', 'btn', 'btn-'+type, !!disabled && 'disabled']" @click="click" @mouseleave="mouseleave" @mouseenter="mouseenter">
-        <i v-show="!loading" :class="['fa', 'fa-'+icon]"></i>
+    <span :class="['com-button com-button-' + type, !!disabled && 'disabled']" @click="click" @mouseleave="mouseleave" @mouseenter="mouseenter">
+        <!-- 背景动画 -->
+        <i v-if="icon" v-show="!loading" :class="['fa', 'fa-'+icon]"></i>
         <span v-show="openText">
             <slot></slot>
             <i v-show="loading" class="fa fa-spinner fa-spin"></i>
         </span>
-    </a>
+    </span>
 </template>
 <script>
 export default {
@@ -18,7 +19,7 @@ export default {
 
         showText: {
             type: Boolean,
-            default(){
+            default () {
                 return true;
             }
         },
@@ -27,45 +28,111 @@ export default {
             type: Boolean
         },
 
-        icon: {
-            type: String
-        },
-
-        type: {
-            type: String
-        },
-
         value: {
 
         }
     },
 
-    data(){
-        return {openText: this.showText};
+    data() {
+        return {
+            icon: '',
+            type: 'default',
+            openText: this.showText
+        };
+    },
+
+    mounted() {
+        var type = this.$el.getAttribute('type');
+        if(!!type) {
+            this.type = type;
+        }
+
+        var icon = this.$el.getAttribute('icon');
+        if(!!type) {
+            this.icon = icon;
+        }
     },
 
     methods: {
-        mouseenter(){
-            if(!this.showText) {
+        mouseenter() {
+            if (!this.showText) {
                 this.openText = true;
             }
         },
 
-        mouseleave(){
-            if(!this.showText) {
+        mouseleave() {
+            if (!this.showText) {
                 this.openText = false;
-            }            
+            }
         },
 
-        click(){
+        click() {
             this.$emit('click');
         }
     }
 }
 </script>
 <style scoped lang="scss">
+$default: #777;
+$primary: #69c;
+$success: #5cb85c;
+$warning: #f0ad4e;
+$danger: #d9534f;
+$disabled: #ccc;
+@mixin button($type) {
+    border: 1px solid $type;
+    color: $type;
+    &:hover {
+        opacity: .7;
+    }
+    &:active {}
+}
+
 .com-button {
-    // transition:.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    touch-action: manipulation;
+    user-select: none;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: .2s;
+}
+
+.com-button-default {
+    @include button($default);
+}
+
+.com-button-primary {
+    @include button($primary);
+}
+
+.com-button-success {
+    @include button($success);
+}
+
+.com-button-warning {
+    @include button($warning);
+}
+
+.com-button-danger {
+    @include button($danger);
+}
+
+.com-button-disabled {
+    @include button($disabled);
+    &:hover {
+        cursor: auto;
+    }
 }
 
 .v-enter-active {
