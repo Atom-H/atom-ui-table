@@ -16,9 +16,7 @@
                     <v-form v-model="formValues.body" :form="form.data.form">
                     </v-form>
                     <template slot="btn-group">
-                        <a @click="back" class="btn btn-default">
-                            <i class="glyphicon glyphicon-return"></i> 返回
-                        </a>
+                        <v-button @click="back">返回</v-button>
                         <v-button v-if="undefined != form.data.url.submit" @click="submit" :disabled="btnSubmit.disabled" :loading="btnSubmit.loading" :icon="'check'" :type="'primary'">{{btnSubmit.text}}</v-button>
                     </template>
                 </form-layout>
@@ -181,6 +179,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.panel-footer{background: #fff;}
 .v-enter {
     opacity: 0;
     transform: translateY(-.5rem);
