@@ -21,8 +21,8 @@
                                type="text"
                                placeholder="0"
                                v-model="item.ratingScore"
-                               @keyup="numFun"
-                               @blur="testNum">
+                               @keyup="numFun(listindex,index,'rate')"
+                               @blur="testNum(listindex,index,'rate')">
                     </div>
                 </div>
                 <div class="dd-self-percent" v-if="item.leaderShow == true">
@@ -32,8 +32,8 @@
                                type="text"
                                placeholder="0"
                                v-model="item.leaderScore"
-                               @keyup="numFun"
-                               @blur="testNum">
+                               @keyup="numFun(listindex,index,'leader')"
+                               @blur="testNum(listindex,index,'leader')">
                     </div>
                 </div>
             </template>
@@ -88,32 +88,59 @@
         },
         methods:{
 //            失去焦点的时候再验证一次
-            testNum:function(e){
-                //                正则验证0到100之间的正数包含小数
+            testNum:function(idx1,idx2,el){
+//              正则验证0到100之间的正数包含小数
                 var r = /^(\d{1,3}(\.\d{1,2})?|100)$/;
-
-                if(!r.test(e.target.value)){
-                    e.target.value='';
-                    //alert("请输入0到100之间的数字，最多含两位小数")
-                }
-                else{
-                    e.target.value=parseFloat(e.target.value)
+                switch (el){
+//                  rate类型的输入框
+                    case 'rate':
+//                      这里面要操作的是数据！！！一定不要去操作e.target.value
+                        if(!r.test(this.dataVal[idx1].listData[idx2].ratingScore)){
+                            this.dataVal[idx1].listData[idx2].ratingScore='';
+                        }
+                        else{
+                            this.dataVal[idx1].listData[idx2].ratingScore=parseFloat(this.dataVal[idx1].listData[idx2].ratingScore)
+                        }
+                        break;
+//                  leader类型的输入框
+                    case 'leader':
+                        if(!r.test(this.dataVal[idx1].listData[idx2].leaderScore)){
+                            this.dataVal[idx1].listData[idx2].leaderScore='';
+                        }
+                        else{
+                            this.dataVal[idx1].listData[idx2].leaderScore=parseFloat(this.dataVal[idx1].listData[idx2].leaderScore)
+                        }
+                        break;
                 }
 
             },
-//            输入阶段进行的验证
-            numFun:function(e){
-                if(parseInt(e.target.value)>=100){
-                    return e.target.value = 100
+//          输入阶段进行的验证,要直接修改操作数据，获取当前数据在json中的位置
+            numFun:function(idx1,idx2,el){
+                switch (el){
+//                  rate类型的输入框
+                    case 'rate':
+                        if(parseInt(this.dataVal[idx1].listData[idx2].ratingScore)>=100){
+                            return this.dataVal[idx1].listData[idx2].ratingScore=100
+                        }
+                        this.dataVal[idx1].listData[idx2].ratingScore=this.dataVal[idx1].listData[idx2].ratingScore.replace(/^[.]+/,'');
+                        this.dataVal[idx1].listData[idx2].ratingScore=this.dataVal[idx1].listData[idx2].ratingScore.replace(/\b(0+)/gi,'');
+                        this.dataVal[idx1].listData[idx2].ratingScore=this.dataVal[idx1].listData[idx2].ratingScore.replace(/[^0-9.]/g,'');
+                        break;
+//                  leader类型的输入框
+                    case 'leader':
+                        if(parseInt(this.dataVal[idx1].listData[idx2].leaderScore)>=100){
+                            return this.dataVal[idx1].listData[idx2].leaderScore=100
+                        }
+                        this.dataVal[idx1].listData[idx2].leaderScore=this.dataVal[idx1].listData[idx2].leaderScore.replace(/^[.]+/,'');
+                        this.dataVal[idx1].listData[idx2].leaderScore=this.dataVal[idx1].listData[idx2].leaderScore.replace(/\b(0+)/gi,'');
+                        this.dataVal[idx1].listData[idx2].leaderScore=this.dataVal[idx1].listData[idx2].leaderScore.replace(/[^0-9.]/g,'');
+                        break;
                 }
-                e.target.value=e.target.value.replace(/^[.]+/,'')
-                e.target.value=e.target.value.replace(/\b(0+)/gi,'')
-                e.target.value=e.target.value.replace(/[^0-9.]/g,'')
+
             },
 //            返回上一页
             backPage:function(){
-                this.$router.back()
-//                window.history.go(-1);
+                this.$router.back();
             },
             showDetail(_listindex,_index){
 
