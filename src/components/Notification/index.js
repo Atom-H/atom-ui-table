@@ -6,7 +6,7 @@ plugin.install = (Vue, options) => {
     // 创建一个挂载点
     var node = document.createElement('div');
     // 起个不重复的名字
-    node.id = '_app-notification-' + Math.ceil(Math.random());
+    node.id = '_app-notification-' + Math.ceil(Math.random() * 1000);
     document.body.appendChild(node);
     // 挂载
     var vm = new ServerComponent().$mount('#' + node.id);
@@ -16,9 +16,7 @@ plugin.install = (Vue, options) => {
     var id = 0;
     Vue.prototype.$notify = (content = '', options = {}) => {
         id++;
-        return new Promise((resolve, reject) => {
-            vm.list = [...vm.list, {content, id}];
-        });
+        vm.list = [...vm.list, { content, id, ...options}];
     };
 }
 

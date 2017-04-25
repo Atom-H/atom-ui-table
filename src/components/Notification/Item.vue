@@ -1,15 +1,16 @@
 <template>
     <div v-if="!isClose" class="notification-item">
-        <div class="scope">
+        <div class="body">
             <v-close @click.native="close" class="close"></v-close>
             <a :class="['title', link && 'link']" v-html="title"></a>
-            <!-- <a class="countdown">{{' ' + countDown + 's'}}</a> -->
-            <p class="content" v-html="content + id"></p>
+            <p class="content" v-html="content"></p>
         </div>
+        <v-progress-line v-if="-1 < this.holdTime" :value="progress" :time="holdTime"></v-progress-line>
     </div>
 </template>
 <script>
 import VClose from '../Static/CloseButton'
+import VProgressLine from '../Progress/Line'
 export default {
     name: 'notificationItem',
 
@@ -34,30 +35,27 @@ export default {
 
         holdTime: {
             type: Number,
-            default: 3000
+            default: 5000
+        },
+
+        type: {
+            type: String
         }
     },
 
     data() {
         return {
-            countDown: 0,
-            isClose: false
+            isClose: false,
+            progress: 100
         }
     },
 
     mounted() {
-        setTimeout(() => {
-            this.$emit('close', this.id);
-        }, this.holdTime);
-
-        var time = Math.ceil((this.holdTime - 1000) / 1000);
-        this.countDown = time;
-        setInterval(()=> {
-            if(0 < time) {
-                time--; 
-                this.countDown = time;
-            }
-        }, 1000);
+        if (-1 < this.holdTime) {
+            setTimeout(() => {
+                this.$emit('close', this.id);
+            }, this.holdTime);
+        }
     },
 
     methods: {
@@ -67,21 +65,22 @@ export default {
     },
 
     components: {
-        VClose
+        VClose,
+        VProgressLine
     }
 
 }
 </script>
 <style scoped lang="scss">
 .notification-item {
+    overflow: hidden;
     transition: all .5s;
     width: 320px;
     margin: 15px 0;
     border-radius: 4px;
     background: #fff;
-    border: 1px solid #eee;
-    box-shadow: 1px 2px 5px rgba(#000, .1);
-    .scope {
+    box-shadow: 1px 2px 3px rgba(#000, .1), -1px -2px 3px rgba(#aaa, .1);
+    .body {
         padding: 15px;
         position: relative;
         .close {
@@ -94,7 +93,10 @@ export default {
             color: #222;
             text-decoration: none;
         }
-        .countdown{color: #ccc;font-size: 14px;}
+        .countdown {
+            color: #ccc;
+            font-size: 14px;
+        }
         .link {
             &:hover {
                 text-decoration: underline;
@@ -104,6 +106,7 @@ export default {
         .content {
             font-size: 12px;
             color: #666;
+            line-height: 1.5;
             letter-spacing: 1px;
             padding: 0;
             margin: 5px 0;
