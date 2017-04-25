@@ -31,11 +31,11 @@
             "tagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "ratingShow":true,
             "ratingText":"自评分",
-            "ratingEdit":true,
+            "ratingEdit":false,
             "ratingScore":0,
             "leaderShow":true,
             "leaderText":"自评分",
-            "leaderEdit":true,
+            "leaderEdit":false,
             "leaderScore":0
           },
           {
@@ -47,40 +47,50 @@
             "tagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
             "ratingShow":true,
             "ratingText":"自评分",
-            "ratingEdit":true,
+            "ratingEdit":false,
             "ratingScore":0,
             "leaderShow":true,
             "leaderText":"自评分",
-            "leaderEdit":true,
+            "leaderEdit":false,
             "leaderScore":0
           }
         ]
       },
       {
-        "title":"品行指标",
-        "listTotal":0,
+        "title":"业绩指标",
+        "total":"0",
         "listData":[
           {
-            "listName":"其他事务性及临时工作（2016）",
-            "listPercent":"5%",
-            "listDetail":"其他事务性及临时工作其及临临时工作其他事务性及临时工作",
-            "listMore":"其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时",
-            "listTag":"参考标准",
-            "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
-            "listSelf":"自评分",
-            "listIptReadOnly":false,
-            "listSelfVal":0
+            "name":"其他事务性及临时工作（2016）",
+            "percent":"5%",
+            "detail":"其他事务性及临时工作其及临临时工作其他事务性及临时工作",
+            "more":"其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时",
+            "tag":"参考标准",
+            "tagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
+            "ratingShow":true,
+            "ratingText":"自评分",
+            "ratingEdit":false,
+            "ratingScore":0,
+            "leaderShow":true,
+            "leaderText":"自评分",
+            "leaderEdit":false,
+            "leaderScore":0
           },
           {
-            "listName":"其他事务",
-            "listPercent":"75%",
-            "listDetail":"其他事务性及临时务性及临时工作",
-            "listMore":"其他事务性及临时工作其他事务性及临时工作其他事务性及临时工性及临时",
-            "listTag":"参考标准",
-            "listTagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
-            "listSelf":"自评分",
-            "listIptReadOnly":true,
-            "listSelfVal":0
+            "name":"其他事务性及临时工作（2017）",
+            "percent":"5%",
+            "detail":"其他事务性及临时工作其及临临时工作其他事务性及临时工作",
+            "more":"其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时工作其他事务性及临时",
+            "tag":"参考标准",
+            "tagDetail":"<p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p> <p>&gt;小于80% 低于70分</p>",
+            "ratingShow":true,
+            "ratingText":"自评分",
+            "ratingEdit":false,
+            "ratingScore":0,
+            "leaderShow":true,
+            "leaderText":"自评分",
+            "leaderEdit":false,
+            "leaderScore":0
           }
         ]
       }
