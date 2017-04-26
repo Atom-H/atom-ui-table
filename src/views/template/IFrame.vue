@@ -15,6 +15,18 @@ export default {
         return {h: 1000};
     },
 
+    created() {
+        if (typeof(this.$parent.$el) != 'undefined'){
+            this.$parent.$el.style.padding = '0px';
+        }
+    },
+
+    destroyed() {
+        if (typeof(this.$parent.$el) != 'undefined'){
+            this.$parent.$el.style.padding = '15px';
+        }
+    },
+
     computed: {
         url(){
             return this.$route.query.url;
@@ -24,7 +36,6 @@ export default {
 </script>
 
 <style lang=scss scoped>
-iframe{margin: -15px;}
 .v-enter{
     opacity: 0;
     transform: scale(.1);
