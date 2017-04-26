@@ -12,7 +12,7 @@ export default {
     },
 
     mounted(){
-    	this.value.split('')
+    	// this.value.split(' ');
     }
 }
 </script>

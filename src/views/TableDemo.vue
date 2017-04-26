@@ -50,7 +50,7 @@ export default {
                 btns: [{
                     event: 'remove',
                     class: 'warning',
-                    text: '<i class="fa fa-remove"></i> 删除'
+                    text: '删除'
                 }, {
                     event: 'toggle',
                     text: ['启用', '禁用'],

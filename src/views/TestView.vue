@@ -2,30 +2,26 @@
     <div class="view">
         <a class="btn btn-primary" @click="popup">确定</a>
         <hr>
-
         <v-button style="margin: 15px;" type="ghost" icon="check">确定</v-button>
-        
         <v-button style="margin: 15px;" type="default" icon="check">确定</v-button>
-
         <v-button style="margin: 15px;" type="primary" icon="check">确定</v-button>
-
         <v-button style="margin: 15px;" type="success">确定</v-button>
-
         <v-button style="margin: 15px;" type="danger">确定</v-button>
-    
         <v-button style="margin: 15px;" type="info">确定</v-button>
-
         <v-button style="margin: 15px;" type="warning" disabled>确定</v-button>
+        <v-date-time></v-date-time>
     </div>
 </template>
 <script>
 import VButton from '../components/form/Button'
-
+import VDateTime from '../components/form/DateTimePickPanel'
 export default {
     name: 'testView',
 
     data() {
-        return {};
+        return {
+            d: null
+        };
     },
 
     methods: {
@@ -45,7 +41,8 @@ export default {
     },
 
     components: {
-        VButton
+        VButton,
+        VDateTime
     }
 }
 </script>
