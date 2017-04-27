@@ -201,7 +201,7 @@ export default {
          */
         httpGetBaseView(cb) {
             var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
-            axios.get(url)
+            axios.get(url, {params: this.$route.query})
                 .then((response) => {
                     cb(response);
                 })

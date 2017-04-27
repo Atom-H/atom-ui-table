@@ -68,16 +68,10 @@ export default {
          * 触发: 获取表格数据
          */
         $route(newValue, oldValue) {
-            // 判断是否切换初始化数据变化
-            if (newValue.path != oldValue.path) {
                 this.httpGetBaseView(response => {
                     this.form = response.data;
                     this.setDefaultValue();
                 });
-            } else {
-                // 遍历默认值
-                this.setDefaultValue();
-            }
         }
     },
 
