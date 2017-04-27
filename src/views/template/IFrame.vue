@@ -15,7 +15,7 @@ export default {
         return {h: 1000};
     },
 
-    created() {
+    /*created() {
         if (typeof(this.$parent.$el) != 'undefined'){
             this.$parent.$el.style.padding = '0px';
         }
@@ -25,7 +25,7 @@ export default {
         if (typeof(this.$parent.$el) != 'undefined'){
             this.$parent.$el.style.padding = '15px';
         }
-    },
+    },*/
 
     computed: {
         url(){
