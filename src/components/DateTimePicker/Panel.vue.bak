@@ -1,11 +1,11 @@
 <template>
-    <div class="">
+    <div class="panel">
         <h1>{{xx}}</h1>
-        <input type="text" v-model.number="m" style="border:1px solid #ccc; padding:15px;">
-        <div class="panel">
-            <div class="body">
-                <span class="item-date" v-for="item in d">{{item}}</span>
-            </div>
+        <div class="weekdays">
+            <span class="weekday" v-for="weekday in weekdays">{{weekday}}</span>
+        </div>
+        <div class="days">
+            <span class="day" v-for="item in d">{{item}}</span>
         </div>
     </div>
 </template>
@@ -22,13 +22,15 @@ export default {
 
     data() {
         return {
+            weekdays: ['日', '一', '二', '三', '四', '五', '六'],
             xx: null,
-            m: 1
+            m: 3
         };
     },
 
     computed: {
         d() {
+            moment.locale('zh-cn');
             // Moment.locale('zh-cn');
             // moment.utc(8);
             var dates = [];
@@ -40,6 +42,10 @@ export default {
                 m: 0,
                 s: 0
             });
+
+            
+
+            var count = 0;
             var activeDate = moment(time);
             // 本月第一天
             var activeBeginDate = moment(time).startOf('month');
@@ -48,17 +54,20 @@ export default {
             // 上个月最后一天
             var lastEndDate = moment(activeBeginDate).subtract(1, 'day');
 
-this.xx = (lastEndDate)
+
+            var lastEndDateWeeks = lastEndDate.day()
 
             // 上个月的几天
-            for (var i = 0; i < lastEndDate.day(); i++) {
+            for (var i = 0; i <= lastEndDateWeeks; i++) {
                 var date = lastEndDate.date() - i;
                 dates.splice(0, 0, date);
+                count++;
             }
 
             // 本月的日期
             for (var j = 1; j <= activeEndDate.date(); j++) {
                 dates.push(j);
+                count++;
             }
 
 
@@ -67,7 +76,7 @@ this.xx = (lastEndDate)
             // 下个月的几天
             var whichWeek = nextBeginDate.day();
             if (0 < whichWeek) {
-                for (var k = 1; k <= 8 - whichWeek; k++) {
+                for (var k = 1; k <= 42 - count; k++) {
                     dates.push(k);
                 }
             }
@@ -83,27 +92,40 @@ this.xx = (lastEndDate)
 }
 </script>
 <style scoped lang="scss">
+@import '../../scss/theme.scss';
+$size : 36px;
 .panel {
     box-shadow: 1px 2px 3px rgba(0, 0, 0, .1), -1px -2px 3px rgba(0, 0, 0, .1);
     margin: 15px;
     padding: 10px;
     overflow: hidden;
     display: inline-block;
-    .body {
-        width: 210px;
-        display: block;
-        .item-date {
+    .weekdays {
+        width: $size * 7;
+        .weekday {
+            width: $size;
+            height: $size;
+            line-height: $size;
+            display: inline-block;
+            text-align: center;
+            font-size: 12px;
+        }
+    }
+    .days {
+        width: $size * 7;
+        .day {
             transition: all .3s;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
+            width: $size;
+            height: $size;
+            line-height: $size;
             display: inline-block;
             text-align: center;
             font-size: 12px;
             &:hover {
                 border-radius: 4px;
-                background: #ccc;
+                background: $hover;
                 cursor: pointer;
+                color: $base;
             }
         }
     }

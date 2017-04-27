@@ -9,18 +9,19 @@
         <v-button style="margin: 15px;" type="danger">确定</v-button>
         <v-button style="margin: 15px;" type="info">确定</v-button>
         <v-button style="margin: 15px;" type="warning" disabled>确定</v-button>
-        <v-date-time></v-date-time>
+        <h1>{{date}}</h1>
+        <v-date-time v-model="date"></v-date-time>
     </div>
 </template>
 <script>
 import VButton from '../components/form/Button'
-import VDateTime from '../components/form/DateTimePickPanel'
+import VDateTime from '../components/DateTimePicker/Panel'
 export default {
     name: 'testView',
 
     data() {
         return {
-            d: null
+            date: '2017-03-27 13:15:00'
         };
     },
 

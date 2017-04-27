@@ -15,27 +15,6 @@
                 "create_time": "2019-01-12",
                 "path": "/home/x/x",
                 "query": { "limit": 15, "page": 1 }
-            }, {
-                "title": "22222",
-                "icon": "../../static/avator.jpeg",
-                "desc": "x222222",
-                "create_time": "2019-01-12",
-                "path": "/home/x/x",
-                "query": { "limit": 15, "page": 1 }
-            }, {
-                "title": "33333",
-                "icon": "../../static/avator.jpeg",
-                "desc": "x222222",
-                "create_time": "2019-01-12",
-                "path": "/home/x/x",
-                "query": { "limit": 15, "page": 1 }
-            }, {
-                "title": "4444",
-                "icon": "../../static/avator.jpeg",
-                "desc": "x222222",
-                "create_time": "2019-01-12",
-                "path": "/home/x/x",
-                "query": { "limit": 15, "page": 1 }
             }]
         }
     }
