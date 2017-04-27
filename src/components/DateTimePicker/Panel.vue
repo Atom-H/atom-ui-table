@@ -3,19 +3,17 @@
         <div class="weekdays">
             <span class="weekday" v-for="weekday in weekdays">{{weekday}}</span>
         </div>
-        <transition mode="out-in">
-            <div class="days">
-                <span class="day day-prev" v-for="day in prevMonthDays" :key="day.obj" @click="selectDay(day.obj)">
+        <transition-group class="days" name="list" tag="div" mode="out-in">
+            <span class="day day-prev" v-for="day in prevMonthDays" :key="day.obj" @click="selectDay(day.obj)">
                 {{day.num}}
             </span>
-                <span class="day" v-for="day in days" :key="day.obj" @click="selectDay(day.obj)">
+            <span class="day" v-for="day in days" :key="day.obj" @click="selectDay(day.obj)">
                 {{day.num}}
             </span>
-                <span class="day day-next" v-for="day in nextMonthDays" :key="day.obj" @click="selectDay(day.obj)">
+            <span class="day day-next" v-for="day in nextMonthDays" :key="day.obj" @click="selectDay(day.obj)">
                 {{day.num}}
             </span>
-            </div>
-        </transition>
+        </transition-group>
     </div>
 </template>
 <script>
@@ -106,7 +104,7 @@ export default {
 
     watch: {
         value(newDate, oldDate) {
-            if (!moment(newDate).isSame(oldDate, 'month')) {
+            if(!moment(newDate).isSame(oldDate, 'month')) {
                 this.prevMonthDays = this.getPrevMonthDays();
                 this.days = this.getDays();
                 this.nextMonthDays = this.getNextMonthDays();
@@ -142,6 +140,8 @@ $fontSize: 12px;
         }
     }
     .days {
+        height: $size * 6;
+        overflow: hidden;
         // 清除inline-block的空格间距
         font-size: 0;
         width: $size * 7;
@@ -173,14 +173,11 @@ $fontSize: 12px;
 }
 
 // 动画
-.list-enter {
-    opacity: 0;
-    transform: translateX(-10px);
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
 }
-
-.list-leave-active {
-    opacity: 0;
-    transform: translateX(-10px);
-    position: absolute;
+.list-enter, .list-leave-active {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>
