@@ -55,6 +55,7 @@ $bgColor: #fff;
 $hoverColor: #e7e7e7;
 $fontColor: #777;
 .layout-sidebar {
+    overflow: auto;
     width: 160px;
     transition: all .3s;
     box-shadow: 1px 0 3px rgba(0, 0, 0, .1);
