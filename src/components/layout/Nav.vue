@@ -1,28 +1,34 @@
 <template>
     <nav class="layout-nav">
         <span class="logo">
-            <p>MY AUTO</p>
+            <p>迈傲兔办公自动化平台</p>
         </span>
         <span class="tools">
             <span class="envelope">
                 <router-link class="label label-default" tag="span" :to="{path: listUrl.path, query: listUrl.query}">
                     <i class="fa fa-envelope" aria-hidden="true"></i> {{count}}
                 </router-link>
-        </span>
-        <span class="avator" @mouseenter="menuShow = true" @mouseleave="menuShow = false">
-            <div class="dropdown">
-                <router-link tag="img" :to="{path: '/home/personal/edit'}" :src="$store.state.loginModule.avator">
-                </router-link>
-                <ul v-show="menuShow" class="dropdown-list">
-                    <router-link tag="li" :to="{path: '/home/personal/edit'}">
-                        <i class="fa fa-user"></i> 个人中心
-                    </router-link>
-                    <router-link tag="li" :to="{path: '/login'}">
-                        <i class="fa fa-power-off"></i> 退出
-                    </router-link>
-                </ul>
-            </div>
             </span>
+            <div @mouseenter="menuShow = true" @mouseleave="menuShow = false" class="user-box">
+                <span class="avator">
+                    <router-link tag="img" :to="{path: '/home/personal/edit'}" :src="$store.state.loginModule.avator">
+                    </router-link>
+                </span>
+                <span class="user-info">
+                    <b>{{$store.state.loginModule.name}}</b>
+                </span>
+                <div class="dropdown">
+                    <ul v-show="menuShow" class="dropdown-list">
+                        <router-link tag="li" :to="{path: '/home/personal/edit'}">
+                            <i class="fa fa-user"></i> 个人中心
+                        </router-link>
+                        <router-link tag="li" :to="{path: '/login'}">
+                            <i class="fa fa-power-off"></i> 退出
+                        </router-link>
+                    </ul>
+                </div>
+            </div>
+
         </span>
     </nav>
 </template>
@@ -102,10 +108,17 @@ $h: 50px;
         height: $h;
         .envelope {
             float: left;
-            margin: 15px;
+            margin:14px 5px 0px 0px;
             &:hover {
                 cursor: pointer;
             }
+        }
+        .user-box{
+            float:left;
+            margin-right:20px;
+            position: relative;
+            text-align: left;
+            cursor: default;
         }
         .avator {
             $avatorWidth: 30px;
@@ -117,29 +130,37 @@ $h: 50px;
             &:hover {
                 cursor: pointer;
             }
-            .dropdown-list {
-                background: rgba(#fff, 1);
-                border-radius: 2px 0 2px 2px;
-                border: 1px solid #eee;
-                box-shadow: -1px 1px 3px rgba(#000, .2);
-                display: block;
-                position: fixed;
-                top: 40px;
-                right: 22px;
-                li {
-                    width: 100%;
-                    display: block;
-                    padding: 5px 15px;
-                    text-align: left;
-                    &:hover {
-                        background: #eee;
-                    }
-                }
-            }
             img {
                 display: block;
                 width: 100%;
+                border-radius: 10px;
             }
+        }
+        .dropdown-list {
+            background: rgba(#fff, 1);
+            border-radius: 2px 0 2px 2px;
+            border: 1px solid #eee;
+            box-shadow: -1px 1px 3px rgba(#000, .2);
+            display: inline-block;
+            position: absolute;
+            width:120px;
+            top: 45px;
+            right: -9px;
+            li {
+                width: 100%;
+                display: block;
+                padding: 5px 15px;
+                text-align: left;
+                &:hover {
+                    background: #eee;
+                }
+                cursor: pointer;
+            }
+        }
+        .user-info{
+            float: left;
+            text-align: left;
+            line-height: $h;
         }
     }
 }
