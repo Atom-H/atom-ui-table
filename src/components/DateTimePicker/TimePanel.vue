@@ -36,7 +36,8 @@ export default {
         return {
             hour: 0,
             minute: 0,
-            seconds: 0
+            seconds: 0,
+            itemHeight: 24 // 和scss高度一致
         };
     },
 
@@ -45,6 +46,18 @@ export default {
     },
 
     methods: {
+        _stepAnimate(start, end, cb){
+            cb(start);
+            start+= this.itemHeight / 4;
+            requestAnimationFrame(()=>{
+                if(start <= end){
+                    this._stepAnimate(start, end, newStart=>{
+                        cb(newStart);
+                    });
+                }
+            })
+        },
+
         mouseenter(e){
             e.target.style.overflowY = 'scroll';
         },
@@ -55,17 +68,30 @@ export default {
 
         selectHour(hour) {
             this.hour = hour;
-            this.$refs.hour.scrollTop = hour * 24;
+            var start = this.$refs.hour.scrollTop;
+            var end   = hour * this.itemHeight;
+            this._stepAnimate(start, end, newStart=>{
+                this.$refs.hour.scrollTop = newStart;
+            });
+            
         },
 
         selectMinute(minute) {
             this.minute = minute;
-            this.$refs.minute.scrollTop = minute * 24;
+            var start = this.$refs.minute.scrollTop;
+            var end   = minute * this.itemHeight;
+            this._stepAnimate(start, end, newStart=>{
+                this.$refs.minute.scrollTop = newStart;
+            });
         },
 
         selectSeconds(seconds) {
             this.seconds = seconds;
-            this.$refs.seconds.scrollTop = seconds * 24;
+            var start = this.$refs.seconds.scrollTop;
+            var end   = seconds * this.itemHeight;
+            this._stepAnimate(start, end, newStart=>{
+                this.$refs.seconds.scrollTop = newStart;
+            });
         },
 
         convert() {
