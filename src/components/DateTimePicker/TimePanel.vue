@@ -1,23 +1,24 @@
 <template>
     <div class="cell-time-panel">
         <span ref="hour" class="hour" @mouseenter="mouseenter" @mouseleave="mouseleave">
-            <ul>
-                <li v-for="h in 24"  :class="{active: hour == h-1}" @click="selectHour(h-1)">{{h-1}}</li>
-            </ul>
-        </span>
+                                    <ul>
+                                        <li v-for="h in 24"  :class="{active: hour == h-1}" @click="selectHour(h-1)">{{h-1}}</li>
+                                    </ul>
+                                </span>
         <span ref="minute" class="minute" @mouseenter="mouseenter" @mouseleave="mouseleave">
-            <ul>
-                <li v-for="m in 60" :class="{active: minute == m-1}" @click="selectMinute(m-1)">{{m-1}}</li>
-            </ul>
-        </span>
+                                    <ul>
+                                        <li v-for="m in 60" :class="{active: minute == m-1}" @click="selectMinute(m-1)">{{m-1}}</li>
+                                    </ul>
+                                </span>
         <span ref="seconds" class="seconds" @mouseenter="mouseenter" @mouseleave="mouseleave">
-            <ul>
-                <li v-for="s in 60" :class="{active: seconds == s-1}" @click="selectSeconds(s-1)">{{s-1}}</li>
-            </ul>
-        </span>
+                                    <ul>
+                                        <li v-for="s in 60" :class="{active: seconds == s-1}" @click="selectSeconds(s-1)">{{s-1}}</li>
+                                    </ul>
+                                </span>
     </div>
 </template>
 <script>
+import TWEEN from 'tween.js';
 export default {
     name: 'TimePanel',
 
@@ -46,51 +47,75 @@ export default {
     },
 
     methods: {
-        _stepAnimate(start, end, cb){
-            cb(start);
-            start+= this.itemHeight / 4;
-            requestAnimationFrame(()=>{
-                if(start <= end){
-                    this._stepAnimate(start, end, newStart=>{
-                        cb(newStart);
-                    });
-                }
-            })
+        /** 
+         * 缓动
+         */
+        tween(from, max, cb) {
+            var vm = this;
+            var tween = new TWEEN.Tween({value: from})
+                .to({ value: max }, 500)
+                .easing(TWEEN.Easing.Bounce.Out)
+                .onUpdate(function() {
+                    cb(this.value);
+                    // console.log(this.value);
+                })
+                .start();
+            animate();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                TWEEN.update();
+            }
         },
 
-        mouseenter(e){
+        // _stepAnimate(to, max, cb) {
+        //     var step = (max - to) / 10;
+        //     cb(to);
+        //     to += step;
+        //     requestAnimationFrame(() => {
+        //         if (to < max) {
+        //             if (to + step >= max) {
+        //                 to = max;
+        //             }
+        //             this._stepAnimate(to, max, nextTo => {
+        //                 cb(nextTo);
+        //             });
+        //         }
+        //     })
+        // },
+
+        mouseenter(e) {
             e.target.style.overflowY = 'scroll';
         },
 
-        mouseleave(e){
+        mouseleave(e) {
             e.target.style.overflowY = 'hidden';
         },
 
         selectHour(hour) {
             this.hour = hour;
-            var start = this.$refs.hour.scrollTop;
-            var end   = hour * this.itemHeight;
-            this._stepAnimate(start, end, newStart=>{
-                this.$refs.hour.scrollTop = newStart;
+            var from  = this.$refs.hour.scrollTop;
+            var max   = hour * this.itemHeight;
+            this.tween(from, max, value=>{
+                this.$refs.hour.scrollTop = value;
             });
-            
         },
 
         selectMinute(minute) {
             this.minute = minute;
-            var start = this.$refs.minute.scrollTop;
-            var end   = minute * this.itemHeight;
-            this._stepAnimate(start, end, newStart=>{
-                this.$refs.minute.scrollTop = newStart;
+            var from = this.$refs.minute.scrollTop;
+            var max = minute * this.itemHeight;
+            this.tween(from, max, value=>{
+                this.$refs.minute.scrollTop = value;
             });
         },
 
         selectSeconds(seconds) {
             this.seconds = seconds;
-            var start = this.$refs.seconds.scrollTop;
-            var end   = seconds * this.itemHeight;
-            this._stepAnimate(start, end, newStart=>{
-                this.$refs.seconds.scrollTop = newStart;
+            var from = this.$refs.seconds.scrollTop;
+            var max = seconds * this.itemHeight;
+            this.tween(from, max, value=>{
+                this.$refs.seconds.scrollTop = value;
             });
         },
 
@@ -122,7 +147,6 @@ $itemHeight: 24px;
 
     // ::-webkit-scrollbar{background:$light;width: 4px;height: 2px;}
     // ::-webkit-scrollbar-thumb{background:#ccc;  border-radius: 20px;  }
-
     display: inline-block;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, .1), -1px -2px 3px rgba(0, 0, 0, .1);
     margin: 15px;
@@ -131,6 +155,7 @@ $itemHeight: 24px;
     box-sizing: content-box;
     font-size: 0;
     >span {
+        box-sizing: border-box;
         display: inline-block;
         vertical-align: top;
         position: relative;
@@ -140,15 +165,14 @@ $itemHeight: 24px;
         width: $width;
         >ul {
             box-sizing: border-box;
-            transform: transLateY(0);
-            transition: all .3s;
             display: block;
             width: 100%;
-            padding-bottom:$itemHeight * 5;
-            margin:0;
+            padding-bottom: $itemHeight * 5;
+            margin: 0;
             li {
+                box-sizing: border-box;
                 font-size: 12px;
-                width: 100%;
+                width: $width; // 不设置宽度, 滚动条会挤宽度
                 text-align: center;
                 height: $itemHeight;
                 line-height: $itemHeight;
