@@ -44,6 +44,10 @@ export default {
 
     mounted() {
         this.convert();
+        this.selectHour(this.hour);
+        this.selectMinute(this.minute);
+        this.selectSeconds(this.seconds);
+        
     },
 
     methods: {
@@ -54,7 +58,7 @@ export default {
             var vm = this;
             var tween = new TWEEN.Tween({value: from})
                 .to({ value: max }, 500)
-                .easing(TWEEN.Easing.Bounce.Out)
+                .easing(TWEEN.Easing.Cubic.In)
                 .onUpdate(function() {
                     cb(this.value);
                     // console.log(this.value);
