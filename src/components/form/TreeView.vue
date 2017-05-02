@@ -21,7 +21,7 @@ import VTree from './Tree'
 import VModal from '../Dialog/Modal'
 import VDialog from '../Dialog/Dialog'
 export default {
-    name: 'treeView',
+    name: 'TreeView',
 
     props: {
         opts: {
@@ -82,5 +82,6 @@ export default {
 }
 </script>
 <style scoped lang=scss>
-.com-tree-view {}
+.com-tree-view {
+}
 </style>

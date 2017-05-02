@@ -17,13 +17,15 @@
             
         <v-time-panel v-model="time"></v-time-panel>
 
+        <v-drop-menu></v-drop-menu>
+
     </div>
 </template>
 <script>
 import VButton from '../components/form/Button'
 import VDateTime from '../components/DateTimePicker/DatePanel'
 import VTimePanel from '../components/DateTimePicker/TimePanel'
-
+import VDropDown from '../components/DropDown'
 
 export default {
     name: 'testView',
@@ -53,7 +55,7 @@ export default {
 
     components: {
         VButton,
-        VDateTime,VTimePanel
+        VDateTime,VTimePanel, VDropDown
     }
 }
 </script>

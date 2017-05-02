@@ -28,7 +28,7 @@
     "sass-loader": "^4.0.2",
     "trix": "^0.10.1",
     "tween.js": "^16.6.0",
-    "vue": "^2.2.2",
+    "vue": "^2.2.6",
     "vue-router": "^2.2.0",
     "vuedraggable": "^2.9.0",
     "vuex": "^2.0.0"

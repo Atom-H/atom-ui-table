@@ -74,7 +74,7 @@ ul.com-tree {
         overflow: hidden;
         /* 包含自己的子节点 */
         .node {
-            padding: 10px 30px;
+            padding: 8px 30px;
             overflow: hidden;
             border-radius: 4px;
             &:hover {
@@ -84,12 +84,10 @@ ul.com-tree {
             >a {
                 transition: all .3s;
                 padding: 0 15px;
-                font-size: 14px;
-                line-height: 1.4;
+                font-size: 12px;
                 margin: 0;
                 text-decoration: none;
                 display: block;
-                height: 20px;
                 float: left;
                 color: #444;
                 &.active {
