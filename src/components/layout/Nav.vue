@@ -1,7 +1,7 @@
 <template>
     <nav class="layout-nav">
         <span class="logo">
-            <p>迈傲兔办公自动化平台</p>
+            <p><img src="http://oa.imaiyuan.lo/static/images/logo-t.png" alt="迈傲兔办公自动化平台" title="迈傲兔办公自动化平台" width="80%"></p>
         </span>
         <span class="tools">
             <span class="envelope">
