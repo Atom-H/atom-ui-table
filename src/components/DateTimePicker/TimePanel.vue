@@ -139,7 +139,6 @@ $itemHeight: 24px;
     // ::-webkit-scrollbar-thumb{background:#ccc;  border-radius: 20px;  }
     display: inline-block;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, .1), -1px -2px 3px rgba(0, 0, 0, .1);
-    margin: 15px;
     overflow: hidden;
     width: $width * 3;
     box-sizing: content-box;

@@ -16,8 +16,13 @@
         <v-date-time v-model="date" ></v-date-time>
             
         <v-time-panel v-model="time"></v-time-panel>
-
-        <v-drop-menu></v-drop-menu>
+        
+        <v-drop-down style="margin:30px;">
+            <a class="btn btn-default">下拉</a>
+            <template slot="dialog">
+                <v-date-time v-model="date" ></v-date-time>
+            </template>
+        </v-drop-down>
 
     </div>
 </template>
@@ -26,6 +31,10 @@ import VButton from '../components/form/Button'
 import VDateTime from '../components/DateTimePicker/DatePanel'
 import VTimePanel from '../components/DateTimePicker/TimePanel'
 import VDropDown from '../components/DropDown'
+import VMenu from '../components/Menu'
+import VMenuItem from '../components/MenuItem'
+
+
 
 export default {
     name: 'testView',
@@ -54,7 +63,7 @@ export default {
     },
 
     components: {
-        VButton,
+        VButton,VMenu,VMenuItem,
         VDateTime,VTimePanel, VDropDown
     }
 }

@@ -136,10 +136,10 @@ $panelWidth: $size * 7 + $gutter * 2 * 7 + $borderWidth * 2;
 .cell-date-panel {
     display: inline-block;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, .1), -1px -2px 3px rgba(0, 0, 0, .1);
-    margin: 15px;
     overflow: hidden;
     width: $panelWidth;
     padding: 5px;
+    border-radius: $borderRadius;
     box-sizing: content-box;
     .weekdays {
         font-size: 0;
@@ -168,7 +168,7 @@ $panelWidth: $size * 7 + $gutter * 2 * 7 + $borderWidth * 2;
             display: inline-block;
             text-align: center;
             font-size: $fontSize;
-            border-radius: 4px;
+            border-radius: $borderRadius;
             border: 1px solid transparent;
             &:hover {
                 background: $hover;

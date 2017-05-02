@@ -3,7 +3,5 @@
     "desc": "@cword(10, 50)",
     "create_time": "@datetime(\"yyyy-MM-dd HH:mm:ss\")",
     "category": "@cword(3,5) | @cword(3,5) | @cword(3,5)",
-    "url": "@url",
-    "toggleIndex|0-1": 1,
-    "dutyIndex|0-2": 0
+    "url": "@url"
 }

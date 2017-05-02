@@ -51,6 +51,7 @@ export default {
 
         changeTreeValue(item) {
             this.activeNode = item;
+            this.isShowModal = false;
             this.$emit('input', item.value);
         },
 

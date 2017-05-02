@@ -504,7 +504,7 @@
         }],
         "table": {
             "primaryKey": "uid",
-            "url": "./mock/table",
+            "url": "./mock/auto/table2",
             "btnGroupInRow": [{
                 "text": "删除",
                 "icon": "remove",
