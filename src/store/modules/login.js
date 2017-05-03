@@ -32,7 +32,7 @@ const actions = {
     }
 };
 
-// mutations
+// mutations.
 const mutations = {
     /**
      * 存储头像到缓存
