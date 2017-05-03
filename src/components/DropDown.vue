@@ -46,14 +46,16 @@ export default {
                 width: dialogWidth
             } = window.getComputedStyle(this.$refs.dialog, null);
 
-            console.log(0 + dialogHeight)
-
             var {
                 top,
                 left,
+                bottom,
+                right,
                 height,
                 width
             } = this.$el.getBoundingClientRect();
+
+            console.log(parseInt(dialogHeight))
 
             // syslog(window.innerHeight - this.dialog.top - dialogHeight);
         },

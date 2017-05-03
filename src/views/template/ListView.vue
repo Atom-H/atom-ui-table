@@ -130,7 +130,6 @@ export default {
     },
 
     created() {
-        syslog('c' + this.table.status);
         // 渲染: 条件筛选
         this.httpGetBaseView(response => {
             this.viewData = response.data;
