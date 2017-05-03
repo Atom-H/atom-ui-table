@@ -10,7 +10,7 @@
                     <span class="dd-name" v-html="item.name"></span>
                     <span class="dd-percent" v-html="item.percent"></span>
                     <span class="dd-tag" @click="showDetail(listindex,index)">{{item.tag}}<i class="fa fa-sort-desc"></i></span>
-                    <div class="dd-tag-dec" v-show="index==i&&listindex==j" v-html="item.tagDetail">{{item.ratingScore}}</div>
+                    <div class="dd-tag-dec" v-show="1" v-html="item.tagDetail">{{item.ratingScore}}</div>
                 </div>
                 <div class="dd-detail" v-html="item.detail"></div>
                 <div class="dd-more" v-html="item.more"></div>
@@ -186,7 +186,11 @@
                         this.btnSubmit.loading = false;
                         this.btnSubmit.text = '确定';
 
-                        this.$alert(response.data.message)
+                        this.$alert(response.data.message, {
+                            afterLeave: () => {
+                                this.$router.back();
+                            }
+                        })
                     })
                     .catch((error) => {
                         syslog(error);
