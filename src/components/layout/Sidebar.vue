@@ -68,7 +68,7 @@ $fontColor: #777;
     min-height: 100%;
     background: $bgColor;
 
-    // .router-link-active{background:#69c;}
+    //.router-link-active{background:#69c;}
     .caret {
         transition: all .3s;
     }
