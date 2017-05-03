@@ -46,7 +46,7 @@ export default {
                 width: dialogWidth
             } = window.getComputedStyle(this.$refs.dialog, null);
 
-            console.log(dialogHeight)
+            console.log(0 + dialogHeight)
 
             var {
                 top,

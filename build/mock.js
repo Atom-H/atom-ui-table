@@ -231,6 +231,7 @@ module.exports = function(express, app) {
     dir.forEach(file=>{
         if(-1 != file.indexOf('.json')){
             var name = file.replace('.json', '');
+            console.log('/mock/auto/' + name)
             app.all('/mock/auto/' + name, (req, res)=> {
                 var string = fs.readFileSync('./src/mock/' + file, 'utf8');
                 var obj = JSON.parse(string);

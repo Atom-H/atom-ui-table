@@ -130,7 +130,7 @@ export default {
     },
 
     created() {
-
+        syslog('c' + this.table.status);
         // 渲染: 条件筛选
         this.httpGetBaseView(response => {
             this.viewData = response.data;
@@ -201,7 +201,9 @@ export default {
          */
         httpGetBaseView(cb) {
             var url = [API_ROOT, this.$route.path.replace('/home/', '')].join('/');
-            axios.get(url, {params: this.$route.query})
+            axios.get(url, {
+                    params: this.$route.query
+                })
                 .then((response) => {
                     cb(response);
                 })
@@ -213,30 +215,34 @@ export default {
          * 获取表格数据
          */
         httpGetTable() {
+
             this.table.status = -1;
-            this.table.primaryKey = this.viewData.data.table.primaryKey;
-            axios.get(this.viewData.data.table.url, {
-                    params: {
-                        // page: this.$route.query.page,
-                        // limit: this.$route.query.limit,
-                        ... {...this.$route.query, filter: undefined
-                        },
-                        ...this.formValues.filter,
-                        ...this.viewData.data.formHiddenValue
-                    }
-                })
-                .then((response) => {
-                    this.table.status = response.data.status;
-                    if (0 == response.data.status) {
-                        this.table.message = response.data.message;
-                    } else {
-                        this.table.data.count = response.data.data.count;
-                        this.table.data.list = response.data.data.list;
-                    }
-                })
-                .catch((error) => {
-                    syslog(error);
-                });
+            this.$nextTick(() => {
+                this.table.primaryKey = this.viewData.data.table.primaryKey;
+                axios.get(this.viewData.data.table.url, {
+                        params: {
+                            // page: this.$route.query.page,
+                            // limit: this.$route.query.limit,
+                            ... {...this.$route.query, filter: undefined
+                            },
+                            ...this.formValues.filter,
+                            ...this.viewData.data.formHiddenValue
+                        }
+                    })
+                    .then((response) => {
+                        this.table.status = 1;
+                        if (0 == response.data.status) {
+                            this.table.message = response.data.message;
+                        } else {
+                            this.table.data.count = response.data.data.count;
+                            this.table.data.list = response.data.data.list;
+                        }
+                    })
+                    .catch((error) => {
+                        syslog(error);
+                    });
+            });
+
         },
         /**
          * 翻页

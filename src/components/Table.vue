@@ -21,7 +21,7 @@
             <tbody>
                 <tr v-if="!removeList[row[primaryKey]]" v-for="(row, i) in table" :key="row[primaryKey]">
                     <td>
-                        <v-checkbox style="margin:0" :size="checkboxSize" v-model="checkedList[i]">
+                        <v-checkbox @click.native="select(i)" style="margin:0" :size="checkboxSize" :value="checkedList[i]">
                         </v-checkbox>
                     </td>
                     <slot name="row" :row="row" :primaryKey="row[primaryKey]" :index="i"></slot>
@@ -44,7 +44,8 @@ export default {
         },
 
         status: {
-            type: Number
+
+            // type: Number
         },
 
         message: {
@@ -69,7 +70,7 @@ export default {
         }
     },
 
-    created(){
+    mounted() {
         var array = [];
         this.table.forEach((item, i) => {
             if (this.checkedList[i]) {
@@ -89,7 +90,6 @@ export default {
     },
 
     watch: {
-
         activePrimaryKey(value) {
             if ('remove' == this.action) {
                 this.removeList[value] = true;
@@ -107,7 +107,7 @@ export default {
             this.$emit('input', array);
         },
 
-        status(value) {
+        status(value, oldValue) {
             if (1 == value) {
                 this.table.forEach(row => {
                     // 初始化checkbox状态映射
@@ -126,10 +126,18 @@ export default {
     },
 
     methods: {
+        select(i){
+            // 清空行checkbox
+            this.table.forEach(() => {
+                this.checkedList.push(false);
+            });
+            this.checkedList[i] = true;
+        },
+
         selectAll() {
             var bool = !this.allSelect;
-            if(0 == this.checkedList.length) {
-                this.table.forEach(()=>{
+            if (0 == this.checkedList.length) {
+                this.table.forEach(() => {
                     this.checkedList.push(false);
                 });
             }
