@@ -1,7 +1,7 @@
 <template>
     <nav class="layout-nav">
         <span class="logo">
-            <p><img src="http://oa.imaiyuan.lo/static/images/logo-t.png" alt="迈傲兔办公自动化平台" title="迈傲兔办公自动化平台" width="80%"></p>
+            <p><img src="/static/images/logo-t.png" alt="迈傲兔办公自动化平台" title="迈傲兔办公自动化平台" width="80%"></p>
         </span>
         <span class="tools">
             <span class="envelope">
@@ -133,6 +133,7 @@ $h: 50px;
             img {
                 display: block;
                 width: 100%;
+                height:100%;
                 border-radius: 10px;
             }
         }

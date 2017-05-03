@@ -1,5 +1,5 @@
 <template>
-    <div class="layout-sidebar">
+    <div class="layout-sidebar" ref="sidebar">
         <ul class="menu-part">
             <template v-for="item in menu">
                 <li v-if="undefined == item.children" :key="item.id">
@@ -41,11 +41,17 @@ export default {
                 this.menu = response.data.menu;
             }
         });
+        window.onload = () => this.resize();
+        window.onresize = () => this.resize();
     },
 
     methods: {
         toggle(item) {
             item.open = !item.open;
+        },
+        resize: function (){
+            var height = document.documentElement.clientHeight - 50;
+            this.$refs.sidebar.style.height = height+'px';
         }
     }
 }
@@ -62,7 +68,7 @@ $fontColor: #777;
     min-height: 100%;
     background: $bgColor;
 
-    // .router-link-active{background:#69c;}
+    //.router-link-active{background:#69c;}
     .caret {
         transition: all .3s;
     }
