@@ -2,6 +2,16 @@
     <div class="view">
         <a class="btn btn-primary" @click="popup">确定</a>
         <hr>
+<div>
+        <v-row>
+            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">1</v-col>
+            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">2</v-col>
+            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">3</v-col>
+            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">4</v-col>
+        </v-row>
+
+</div>
+
         <v-button style="margin: 15px;" type="ghost" icon="check">确定</v-button>
         <v-button style="margin: 15px;" type="default" icon="check">确定</v-button>
         <v-button style="margin: 15px;" type="primary" icon="check">确定</v-button>
@@ -14,11 +24,10 @@
         <div><input type="text" v-model="time"></div>
 
         <v-date-time v-model="date" ></v-date-time>
-            
-        <v-time-panel v-model="time"></v-time-panel>
+                <v-time-panel v-model="time"></v-time-panel>
         
         <v-drop-down style="margin:30px;">
-            <a class="btn btn-default">下拉</a>
+            <p class="btn btn-default">下拉</p>
             <template slot="dialog">
                 <v-date-time v-model="date" ></v-date-time>
             </template>
@@ -31,6 +40,8 @@ import VButton from '../components/form/Button'
 import VDateTime from '../components/DateTimePicker/DatePanel'
 import VTimePanel from '../components/DateTimePicker/TimePanel'
 import VDropDown from '../components/DropDown'
+import VRow from '../components/Row'
+import VCol from '../components/Col'
 import VMenu from '../components/Menu'
 import VMenuItem from '../components/MenuItem'
 
@@ -64,7 +75,7 @@ export default {
 
     components: {
         VButton,VMenu,VMenuItem,
-        VDateTime,VTimePanel, VDropDown
+        VDateTime,VTimePanel, VDropDown,VRow, VCol
     }
 }
 </script>

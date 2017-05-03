@@ -13,16 +13,21 @@ export default {
     name: 'DropMenu',
 
     props: {
+        reLocation: {
+            type: Boolean,
+            default: false
+        },
+
         value: {
             type: Array
         }
     },
 
     mounted() {
-        window.addEventListener('resize', () => {
-            this.dialog.isShow = false;
-            // this.location();
-        });
+        // window.addEventListener('resize', () => {
+        //     this.dialog.isShow = false;
+        //     // this.location();
+        // });
     },
 
     data() {
@@ -35,17 +40,19 @@ export default {
         }
     },
 
-    watch: {
-
-    },
-
     methods: {
         enter() {
+            this.location();
+        },
+        /**
+         * 定位
+         */
+        location() {
             var {
                 height: dialogHeight,
                 width: dialogWidth
             } = window.getComputedStyle(this.$refs.dialog, null);
-
+            
             var {
                 top,
                 left,
@@ -55,26 +62,20 @@ export default {
                 width
             } = this.$el.getBoundingClientRect();
 
-            console.log(parseInt(dialogHeight))
+            // 判断是左还是右
+            if(0 < window.innerWidth - left  - parseInt(dialogWidth)) {
+                this.left = left + 'px';
+            } else {
+                this.left = left + width - parseInt(dialogWidth) + 'px';
+            }
 
-            // syslog(window.innerHeight - this.dialog.top - dialogHeight);
-        },
-        /**
-         * 定位
-         */
-        location() {
-            // var {
-            //     top,
-            //     left,
-            //     height,
-            //     width
-            // } = this.$el.getBoundingClientRect();
-
-            // syslog(window.innerHeight - this.dialog.top);
-
-            // this.dialog.isShow = true;
-            // this.top = top + height + 'px';
-            // this.left = left + 'px';
+            // 判断是上还是下
+            if(0 < window.innerHeight - top - height - parseInt(dialogHeight)) {
+                this.top = top + height + 'px';
+            } else {
+                this.top = top - parseInt(dialogHeight) + 'px';
+            }
+            // syslog(this.top)
         },
 
         mouseenter() {
@@ -86,8 +87,10 @@ export default {
         }
     },
 
-    components: {
-
+    watch: {
+        reLocation(){
+            this.location();
+        }
     }
 };
 </script>
