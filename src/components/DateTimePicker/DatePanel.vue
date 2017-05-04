@@ -1,5 +1,5 @@
 <template>
-    <div class="cell-date-panel">
+    <div class="component-date-panel">
         <div class="weekdays">
             <span class="weekday" v-for="weekday in weekdays">{{weekday}}</span>
         </div>
@@ -133,7 +133,8 @@ $fontSize: 12px;
 $gutter: 1px;
 $borderWidth: 1px;
 $panelWidth: $size * 7 + $gutter * 2 * 7 + $borderWidth * 2;
-.cell-date-panel {
+.component-date-panel {
+    background: #fff;
     display: inline-block;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, .1), -1px -2px 3px rgba(0, 0, 0, .1);
     overflow: hidden;

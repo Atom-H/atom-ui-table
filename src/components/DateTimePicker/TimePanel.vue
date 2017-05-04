@@ -135,6 +135,7 @@ export default {
 $width: 50px;
 $itemHeight: 24px;
 .cell-time-panel {
+    background: #fff;
     // ::-webkit-scrollbar{background:$light;width: 4px;height: 2px;}
     // ::-webkit-scrollbar-thumb{background:#ccc;  border-radius: 20px;  }
     display: inline-block;

@@ -1,46 +1,48 @@
 <template>
     <div class="view">
-
-    <div class="box">
-        <p>垂直居中</p>
-    </div>
-
-
-
-
+        <div class="box">
+            <p>垂直居中</p>
+        </div>
         <a class="btn btn-primary" @click="popup">确定</a>
         <hr>
-<div>
-        <v-row>
-            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">1</v-col>
-            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">2</v-col>
-            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">3</v-col>
-            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">4</v-col>
-        </v-row>
+        <div>
+            <VRow>
+                <v-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+                    <v-button style="margin: 15px;" type="ghost" icon="check">确定</v-button>
+                    <v-button style="margin: 15px;" type="default" icon="check">确定</v-button>
+                    <v-button style="margin: 15px;" type="primary" icon="check">确定</v-button>
+                    <v-button style="margin: 15px;" type="success">确定</v-button>
+                    <v-button style="margin: 15px;" type="danger">确定</v-button>
+                    <v-button style="margin: 15px;" type="info">确定</v-button>
+                    <v-button style="margin: 15px;" type="warning" disabled>确定</v-button>
+                </v-col>
+            </VRow>
 
-</div>
+            <v-row :gutter="30">
+                <v-col :xs="12" :sm="12" :md="4" :lg="3" :xl="4">
+                    <h1>{{time}}</h1></v-col>
+                <v-col :xs="12" :sm="12" :md="4" :lg="3" :xl="4">
+                    <input type="text" v-model="time">
+                </v-col>
+                <v-col :push="1" :xs="12" :sm="12" :md="4" :lg="5" :xl="4">
+                    <v-date-time v-model="date"></v-date-time>
+                </v-col>
+            </v-row>
 
-        <v-button style="margin: 15px;" type="ghost" icon="check">确定</v-button>
-        <v-button style="margin: 15px;" type="default" icon="check">确定</v-button>
-        <v-button style="margin: 15px;" type="primary" icon="check">确定</v-button>
-        <v-button style="margin: 15px;" type="success">确定</v-button>
-        <v-button style="margin: 15px;" type="danger">确定</v-button>
-        <v-button style="margin: 15px;" type="info">确定</v-button>
-        <v-button style="margin: 15px;" type="warning" disabled>确定</v-button>
-        <h1>{{time}}</h1>
-
-        <div><input type="text" v-model="time"></div>
-
-        <v-date-time v-model="date" ></v-date-time>
-                <v-time-panel v-model="time"></v-time-panel>
-        
-        <v-drop-down style="margin:30px;">
-            <p class="btn btn-default">下拉</p>
-            <template slot="dialog">
-                <v-date-time v-model="date" ></v-date-time>
-            </template>
-        </v-drop-down>
-
+            <v-row>
+                <v-col :xs="12" :sm="12" :md="4" :lg="3" :xl="4" >
+                    <v-time-panel v-model="time"></v-time-panel>
+                </v-col>
+                <v-col :xs="12" :sm="12" :md="4" :lg="3" :xl="4" :offset="1">
+                    <v-drop-down style="margin:30px;">
+                        <p class="btn btn-default">下拉</p>
+                        <template slot="dialog">
+                            <v-date-time v-model="date"></v-date-time>
+                        </template>
+                    </v-drop-down>
+                </v-col>
+            </v-row>
+        </div>
     </div>
 </template>
 <script>
@@ -82,12 +84,23 @@ export default {
     },
 
     components: {
-        VButton,VMenu,VMenuItem,
-        VDateTime,VTimePanel, VDropDown,VRow, VCol
+        VButton,
+        VMenu,
+        VMenuItem,
+        VDateTime,
+        VTimePanel,
+        VDropDown,
+        VRow,
+        VCol
     }
 }
 </script>
 <style lang="scss" scope>
-    .box{position: absolute;top:50%;left:50%; transform: translate(-50%, -50%)}
-
+.view{height: 2000px;overflow-y: scroll;}
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
 </style>
