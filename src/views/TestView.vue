@@ -1,5 +1,13 @@
 <template>
     <div class="view">
+
+    <div class="box">
+        <p>垂直居中</p>
+    </div>
+
+
+
+
         <a class="btn btn-primary" @click="popup">确定</a>
         <hr>
 <div>
@@ -80,4 +88,6 @@ export default {
 }
 </script>
 <style lang="scss" scope>
+    .box{position: absolute;top:50%;left:50%; transform: translate(-50%, -50%)}
+
 </style>
