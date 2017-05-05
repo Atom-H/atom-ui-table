@@ -8,10 +8,6 @@ export default {
     name: 'Col',
 
     props: {
-        span: {
-            default: 12
-        },
-
         xs: {
             default: 12
         },
