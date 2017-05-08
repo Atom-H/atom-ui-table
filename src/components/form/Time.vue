@@ -65,6 +65,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .com-time {
+    
     overflow: hidden;
     input {
         width: 60px;

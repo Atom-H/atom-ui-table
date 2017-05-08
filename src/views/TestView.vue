@@ -1,47 +1,61 @@
 <template>
-    <div class="view">
+<div class="warp">
+    <input  class="form-control" v-model="scrollTop"/>
 
-    <div class="box">
-        <p>垂直居中</p>
-    </div>
+    <scroll-view :scrollTop.sync="scrollTop">
+        <v-spinner slot="background" style="margin:15px auto;">松开加载更多</v-spinner>
+<!--         <h1 slot="bottom-fixed" v-model="date" style="padding:15px;background:#67c;margin:0;">
+            header-fixed
+        </h1> -->
+        <div class="view">
+            
+            <a class="btn btn-primary" @click="popup">确定</a>
+            <hr>
+            <v-flex-box>
+                <div style="padding:15px;">123456</div>
+                <v-flex-item>1</v-flex-item>
+            </v-flex-box>
+            <div>
+                <VRow>
+                    <v-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12">
+                        <v-button style="margin: 15px;" type="ghost" icon="check">确定</v-button>
+                        <v-button style="margin: 15px;" type="default" icon="check">确定</v-button>
+                        <v-button style="margin: 15px;" type="primary" icon="check">确定</v-button>
+                        <v-button style="margin: 15px;" type="success">确定</v-button>
+                        <v-button style="margin: 15px;" type="danger">确定</v-button>
+                        <v-button style="margin: 15px;" type="info">确定</v-button>
+                        <v-button style="margin: 15px;" type="warning" disabled>确定</v-button>
+                    </v-col>
+                </VRow>
+                <v-row :gutter="30">
+                    <v-col :xs="12" :sm="12" :md="4" :lg="3" :xl="4">
+                        <h1>{{time}}</h1></v-col>
+                    <v-col :xs="12" :sm="12" :md="4" :lg="3" :xl="4">
+                        <input type="text" v-model="time">
+                    </v-col>
+                    <v-col :push="1" :xs="12" :sm="12" :md="4" :lg="5" :xl="4">
+                        <v-date-time v-model="date"></v-date-time>
+                    </v-col>
+                </v-row>
+                <v-row>
+                    <v-col :xs="12" :sm="12" :md="4" :lg="3" :xl="4">
+                        <v-time-panel v-model="time"></v-time-panel>
+                    </v-col>
+                    <v-col :xs="12" :sm="12" :md="4" :lg="3" :xl="4" :offset="1">
+                        <v-drop-down style="margin:30px;">
+                            <p class="btn btn-default">下拉</p>
+                            <template slot="dialog">
+                                <v-date-time v-model="date"></v-date-time>
+                            </template>
+                        </v-drop-down>
+                    </v-col>
+                </v-row>
+            </div>
+        </div>
 
+        <v-spinner slot="threshold" style="height:100px;"></v-spinner>
 
-
-
-        <a class="btn btn-primary" @click="popup">确定</a>
-        <hr>
-<div>
-        <v-row>
-            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">1</v-col>
-            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">2</v-col>
-            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">3</v-col>
-            <v-col :xs="12"  :sm="12"  :md="4"  :lg="3" :xl="2">4</v-col>
-        </v-row>
-
-</div>
-
-        <v-button style="margin: 15px;" type="ghost" icon="check">确定</v-button>
-        <v-button style="margin: 15px;" type="default" icon="check">确定</v-button>
-        <v-button style="margin: 15px;" type="primary" icon="check">确定</v-button>
-        <v-button style="margin: 15px;" type="success">确定</v-button>
-        <v-button style="margin: 15px;" type="danger">确定</v-button>
-        <v-button style="margin: 15px;" type="info">确定</v-button>
-        <v-button style="margin: 15px;" type="warning" disabled>确定</v-button>
-        <h1>{{time}}</h1>
-
-        <div><input type="text" v-model="time"></div>
-
-        <v-date-time v-model="date" ></v-date-time>
-                <v-time-panel v-model="time"></v-time-panel>
-        
-        <v-drop-down style="margin:30px;">
-            <p class="btn btn-default">下拉</p>
-            <template slot="dialog">
-                <v-date-time v-model="date" ></v-date-time>
-            </template>
-        </v-drop-down>
-
-    </div>
+    </scroll-view></div>
 </template>
 <script>
 import VButton from '../components/form/Button'
@@ -53,6 +67,13 @@ import VCol from '../components/Col'
 import VMenu from '../components/Menu'
 import VMenuItem from '../components/MenuItem'
 
+import VFlexBox from '../components/layout/flexbox/FlexBox'
+import VFlexItem from '../components/layout/flexbox/FlexItem'
+
+import ScrollView from '../components/ScrollView2'
+import VSpinner from '../components/Spinner'
+
+
 
 
 export default {
@@ -60,6 +81,7 @@ export default {
 
     data() {
         return {
+            scrollTop: 200,
             time: '12:01:02',
             date: '2017-03-27 13:15:00'
         };
@@ -82,12 +104,32 @@ export default {
     },
 
     components: {
-        VButton,VMenu,VMenuItem,
-        VDateTime,VTimePanel, VDropDown,VRow, VCol
+        VButton,
+        VMenu,
+        VMenuItem,
+        VDateTime,
+        VTimePanel,
+        VDropDown,
+        VRow,
+        VCol,
+        VFlexBox,
+        VFlexItem,
+        ScrollView,VSpinner,
     }
 }
 </script>
 <style lang="scss" scope>
-    .box{position: absolute;top:50%;left:50%; transform: translate(-50%, -50%)}
 
+.warp{height: 100%;width: 100%;position: relative;}
+
+.view {
+    height: 2000px;
+}
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
 </style>

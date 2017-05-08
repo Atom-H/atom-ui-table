@@ -100,7 +100,6 @@ export default {
     overflow: hidden;
     display: inline-block;
     .dialog {
-        background: #fff;
         padding: $gutter 0;
         display: inline-block;
         position: fixed;
