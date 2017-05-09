@@ -1,7 +1,7 @@
 // 开发/上线阶段全局变量
 // http://113.6.252.23:6688/tools/vue?page=1&limit=15
 if (process.env.NODE_ENV == 'production') {
-    window.API_ROOT = 'http://113.6.252.23:6688';
+    window.API_ROOT = 'http://' + window.location.hostname;
     window.MENU_URL = [window.API_ROOT, '/personal/menu'].join('');
     window.LOGIN_URL = [window.API_ROOT, '/oauth'].join('');
     window.MESSAGE_LIST = [window.API_ROOT, '/polling '].join('');

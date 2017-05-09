@@ -1,6 +1,6 @@
 <template>
     <div class="view-login">
-        <h2>登陆</h2>
+        <p style="text-align: center"><img src="/static/images/logo.jpg" width="60%"> </p>
         <v-input class="v-input" v-model="userName" :opts="{placeholder: '请输入用户名', validate: {require: true}}" @keyup="login"></v-input>
         <v-input class="v-input" v-model="password" :opts="{placeholder: '请输入密码', validate: {require: true}, type: 'password'}" @keyup="login">
         </v-input>
