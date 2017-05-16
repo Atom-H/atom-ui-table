@@ -10,7 +10,7 @@
         <input v-else @blur="blur" @keyup="keyup" @keydown="keydown" @focus="selectAll" :value="value" @input="input" class="form-control" :placeholder="opts.placeholder" :type="opts.type">
     </div>
 </template>
-<script>
+    <script>
 export default {
     name: 'input',
 
